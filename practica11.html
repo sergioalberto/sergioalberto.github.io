@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Practica 11 - Sergio González Q.</title>
+        <meta charset=utf-8 />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+
+        <style>
+            body { margin:0; padding:0; }
+            #map { position:absolute; top:0; bottom:0; width:100%; }
+        </style>
+    </head>
+    <body>
+        <div id='map'></div>
+        <script>
+            var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([9.959049309716555,-84.085599659843965], 17);
+
+            // Define circle options
+            // http://leafletjs.com/reference.html#circle
+            var circle_options = {
+                color: '#fff',      // Stroke color
+                opacity: 1,         // Stroke opacity
+                weight: 10,         // Stroke weight
+                fillColor: '#000',  // Fill color
+                fillOpacity: 0.6    // Fill opacity
+            };
+
+            // Define polyline options
+            // http://leafletjs.com/reference.html#polyline
+            var polyline_options = {
+                color: '#000',
+                weight: 10
+            };
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("GET","calles.geojson",false);
+            xhr.send(null);
+            var data = JSON.parse(xhr.responseText);
+
+            var lines = [];
+            var i;
+            for (i = 0; i < data.features.length; i++) {
+
+                // Create array of lat,lon points
+                var line_points = [
+                    [data.features[i].geometry.coordinates[0][1], data.features[i].geometry.coordinates[0][0]],
+                    [data.features[i].geometry.coordinates[1][1], data.features[i].geometry.coordinates[1][0]]];
+
+                lines[i] = new L.polyline(line_points, {
+                    color: '#000',
+                    weight: 10,
+                    idName: i      
+                });
+                lines[i].addTo(map);
+                lines[i].bindPopup(data.features[i].properties.Nombre);
+                lines[i].on('click', setColor);
+            };
+
+            xhr.open("GET","restaurantes.geojson",false);
+            xhr.send(null);
+            var data1 = JSON.parse(xhr.responseText);
+
+            var marker = [];
+            var i;
+            for (i = 0; i < data1.features.length; i++) {
+                marker[i] = new L.marker([data1.features[i].geometry.coordinates[1], data1.features[i].geometry.coordinates[0]], {
+                    id: i,
+                    icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'}),
+                    name: data1.features[i].properties.Nombre,
+                    x: data1.features[i].geometry.coordinates[1],
+                    y: data1.features[i].geometry.coordinates[0]
+                });
+                marker[i].addTo(map);
+                marker[i].bindPopup(data1.features[i].properties.Nombre);
+                marker[i].on('click', onClick);
+            };
+
+            function setColor(e) {
+                //alert(""+this.options.idName);
+                var i;
+                for (i = 0; i < data2.features.length; i++) {
+                    polygon[i].setStyle({color: 'blue'});
+                }
+                
+                for (i = 0; i < data.features.length; i++) {
+                    if(i == this.options.idName){
+                        lines[this.options.idName].setStyle({color: 'red'});
+                    }else{
+                        lines[i].setStyle({color:'#000'});
+                    }
+                }                
+            }
+
+            xhr.open("GET","edificios.geojson",false);
+            xhr.send(null);
+            var data2 = JSON.parse(xhr.responseText);
+            //alert(""+data2.features[0].geometry.coordinates[0][0][0]);
+            //alert(""+data2.features[2].geometry.coordinates[0].length);
+
+            var polygon = [];
+            var i;
+            for (i = 0; i < data2.features.length; i++) {
+                //var polygon = L.polygon([[51.509, -0.08],[51.503, -0.06],[51.51, -0.047]]).addTo(map);
+                var polygonData = new Array(data2.features[i].geometry.coordinates[0].length);
+                var j;
+                for (j = 0; j < data2.features[i].geometry.coordinates[0].length; j++) {
+                    polygonData[j] = new Array(2);
+                    //var aux = [data2.features[j].geometry.coordinates[0][0][0][1], data2.features[j].geometry.coordinates[0][0][0][0]];
+                    //alert(""+data2.features[i].geometry.coordinates[0][0][1]);
+                    polygonData[j][0] = data2.features[i].geometry.coordinates[0][j][1];
+                    polygonData[j][1] = data2.features[i].geometry.coordinates[0][j][0];
+                    //polygonData[j][1] = 3;
+                }
+                //alert(""+polygonData);
+                polygon[i] = new L.polygon(polygonData, {color: 'blue',idNamePolygon: i });
+                polygon[i].addTo(map);
+                polygon[i].bindPopup(data2.features[i].properties.Nombre);
+                polygon[i].on('click', setColorPolygon);
+            };
+
+            function setColorPolygon(e) {
+                //alert(""+this.options.idName);
+                var i;
+                for (i = 0; i < data.features.length; i++) {
+                   lines[i].setStyle({color:'#000'});
+                }
+
+                for (i = 0; i < data2.features.length; i++) {
+                    if(i == this.options.idNamePolygon){
+                        polygon[this.options.idNamePolygon].setStyle({color: 'red'});
+                    }else{
+                        polygon[i].setStyle({color:'blue'});
+                    }
+                }
+            }
+
+            //L.marker([51.495, -0.083], {icon: myIcon}).addTo(map).bindPopup("I am a red leaf.");
+            //L.marker([37.9, -77], { icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'})}).addTo(map);
+
+            //var circle = L.circle([51.508, -0.11], 500, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
+            var circle;
+            function onClick(e) {
+                //map.onRemove(circle);
+                //alert(this.options.id);
+                //marker[this.options.id].setStyle({ icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'})});
+                var i;
+
+                //marker[this.options.id].feature.properties['old-color'] = e.layer.feature.properties['marker-color'];
+                //marker[this.options.id].setColor({color:'red'}); //setStyle({icon: L.mapbox.marker.icon(color: 'red')});
+
+                //map.onRemove(circle);
+                for (i = 0; i < data1.features.length; i++) {
+                    if(i == this.options.id){
+                        //circle = L.circle([this.options.x, this.options.y], 25, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
