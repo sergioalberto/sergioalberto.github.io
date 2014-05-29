@@ -18,22 +18,6 @@
         <script>
             var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([9.959049309716555,-84.085599659843965], 17);
 
-            // Define circle options
-            // http://leafletjs.com/reference.html#circle
-            var circle_options = {
-                color: '#fff',      // Stroke color
-                opacity: 1,         // Stroke opacity
-                weight: 10,         // Stroke weight
-                fillColor: '#000',  // Fill color
-                fillOpacity: 0.6    // Fill opacity
-            };
-
-            // Define polyline options
-            // http://leafletjs.com/reference.html#polyline
-            var polyline_options = {
-                color: '#000',
-                weight: 10
-            };
 
             var xhr = new XMLHttpRequest();
 
@@ -60,6 +44,73 @@
                 lines[i].on('click', setColor);
             };
 
+            function setColor(e) {
+                
+                var i;
+                for (i = 0; i < data2.features.length; i++) {
+                    polygon[i].setStyle({color: 'blue'});
+                }
+                for (i = 0; i < data3.features.length; i++) {
+                    linesRios[i].setStyle({color:'blue'});
+                }
+                
+                for (i = 0; i < data.features.length; i++) {
+                    if(i == this.options.idName){
+                        lines[this.options.idName].setStyle({color: 'red'});
+                    }else{
+                        lines[i].setStyle({color:'#000'});
+                    }
+                }                
+            }
+
+
+            xhr.open("GET","rios.geojson",false);
+            xhr.send(null);
+            var data3 = JSON.parse(xhr.responseText);
+
+            var linesRios = [];
+            var i;
+            for (i = 0; i < data3.features.length; i++) {
+
+                // Create array of lat,lon points
+                var line_pointsRios = [
+                    [data3.features[i].geometry.coordinates[0][1], data.features[i].geometry.coordinates[0][0]],
+                    [data3.features[i].geometry.coordinates[1][1], data.features[i].geometry.coordinates[1][0]]];
+
+                var line_pointsRios = new Array(data3.features[i].geometry.coordinates.length);
+                var j;
+                for (j = 0; j < data3.features[i].geometry.coordinates.length; j++) {
+                    line_pointsRios[j] = new Array(2);
+                    
+                    line_pointsRios[j][0] = data3.features[i].geometry.coordinates[j][1];
+                    line_pointsRios[j][1] = data3.features[i].geometry.coordinates[j][0];
+                    
+                }
+
+                linesRios[i] = new L.polyline(line_pointsRios, {color: 'blue',weight: 10,idNameRio: i});
+                linesRios[i].addTo(map);
+                linesRios[i].bindPopup(data3.features[i].properties.Nombre);
+                linesRios[i].on('click', setColorRios);
+            };
+
+            function setColorRios(e) {
+                
+                var i;
+                for (i = 0; i < data2.features.length; i++) {
+                    polygon[i].setStyle({color: 'blue'});
+                }
+                for (i = 0; i < data.features.length; i++) {
+                   lines[i].setStyle({color:'#000'});
+                }
+
+                for (i = 0; i < data3.features.length; i++) {
+                    if(i == this.options.idNameRio){
+                        linesRios[this.options.idNameRio].setStyle({color: 'red'});
+                    }else{
+                        linesRios[i].setStyle({color:'blue'});
+                    }
+                }                
+            }
             xhr.open("GET","restaurantes.geojson",false);
             xhr.send(null);
             var data1 = JSON.parse(xhr.responseText);
@@ -79,27 +130,22 @@
                 marker[i].on('click', onClick);
             };
 
-            function setColor(e) {
-                //alert(""+this.options.idName);
+            function onClick(e) {
                 var i;
+                for (i = 0; i < data.features.length; i++) {
+                   lines[i].setStyle({color:'#000'});
+                }
                 for (i = 0; i < data2.features.length; i++) {
                     polygon[i].setStyle({color: 'blue'});
                 }
-                
-                for (i = 0; i < data.features.length; i++) {
-                    if(i == this.options.idName){
-                        lines[this.options.idName].setStyle({color: 'red'});
-                    }else{
-                        lines[i].setStyle({color:'#000'});
-                    }
-                }                
+                for (i = 0; i < data3.features.length; i++) {
+                    linesRios[i].setStyle({color:'blue'});
+                }
             }
 
             xhr.open("GET","edificios.geojson",false);
             xhr.send(null);
             var data2 = JSON.parse(xhr.responseText);
-            //alert(""+data2.features[0].geometry.coordinates[0][0][0]);
-            //alert(""+data2.features[2].geometry.coordinates[0].length);
 
             var polygon = [];
             var i;
@@ -129,27 +175,16 @@
                    lines[i].setStyle({color:'#000'});
                 }
 
+                for (i = 0; i < data3.features.length; i++) {
+                    linesRios[i].setStyle({color:'blue'});
+                }
+
                 for (i = 0; i < data2.features.length; i++) {
                     if(i == this.options.idNamePolygon){
                         polygon[this.options.idNamePolygon].setStyle({color: 'red'});
                     }else{
                         polygon[i].setStyle({color:'blue'});
                     }
-                }
-            }
-
-            //L.marker([51.495, -0.083], {icon: myIcon}).addTo(map).bindPopup("I am a red leaf.");
-            //L.marker([37.9, -77], { icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'})}).addTo(map);
-
-            //var circle = L.circle([51.508, -0.11], 500, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
-            var circle;
-            function onClick(e) {
-                var i;
-                for (i = 0; i < data.features.length; i++) {
-                   lines[i].setStyle({color:'#000'});
-                }
-                for (i = 0; i < data2.features.length; i++) {
-                    polygon[i].setStyle({color: 'blue'});
                 }
             }
 
