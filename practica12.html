@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <meta http-equiv="Content-Type" content="text/html">
+        <title>Practica 12 - Sergio González Q.</title>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+        <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+        <script src="https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/leaflet.awesome-markers.js"></script>
+
+
+        <style type="text/css">
+        #map { width: 1000px; height: 600px }
+        .awesome-marker {
+            background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-soft.png") no-repeat 0 0;
+            width: 35px; height: 46px;
+            position:absolute;
+            left:0; top:0;
+            display: block;
+            text-align: center;
+        }
+        .awesome-marker-shadow {
+            background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+            width: 36px; height: 16px;
+        }
+        .awesome-marker i {
+            color: #333; margin-top: 10px;
+            display: inline-block; font-size: 14px;
+        }
+        .awesome-marker .icon-white { color: #fff; }
+        .awesome-marker-icon-red { background-position: 0 0; }
+        .awesome-marker-icon-darkred { background-position: -180px 0; }
+        .awesome-marker-icon-orange { background-position: -36px 0; }
+        .awesome-marker-icon-green { background-position: -72px 0; }
+        .awesome-marker-icon-darkgreen { background-position: -252px 0; }
+        .awesome-marker-icon-blue { background-position: -108px 0; }
+        .awesome-marker-icon-darkblue { background-position: -216px 0; }
+        .awesome-marker-icon-purple { background-position: -144px 0; }
+        .awesome-marker-icon-darkpurple { background-position: -288px 0; }
+        .awesome-marker-icon-cadetblue { background-position: -324px 0; }
+        </style>
+    </head>
+<body>
+    <div id="map"></div>
+    <script type="text/javascript">
+    var redMarker = L.AwesomeMarkers.icon({icon: "food",color: "green",iconColor: "black"});
+    function onEachFeature(feature, layer) {layer.bindPopup(feature.properties.Nombre);};
+    function pointToLayer(feature, latlng) {return L.marker(latlng, {icon: redMarker});};
+    var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")|| new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open("GET","restaurantes.geojson",false); 
+    xhr.send(null);
+    var puntos = JSON.parse(xhr.responseText);
+    xhr.open("GET","calles.geojson",false); xhr.send(null);
+    var lineas = JSON.parse(xhr.responseText);
+    xhr.open("GET","edificios.geojson",false); xhr.send(null);
+    var poligonos = JSON.parse(xhr.responseText);
+    var styleLineas = {"color": "#999999","weight": 10,"opacity": 0.65};
+    var stylePoligonos = {"color": "#ff7800","weight": 1,"opacity": 0.65};
+    var puntosLayer = L.geoJson(puntos, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+    var lineasLayer = L.geoJson(lineas, {style: styleLineas, onEachFeature: onEachFeature});
+    var poligonosLayer = L.geoJson(poligonos, {style: stylePoligonos, onEachFeature: onEachFeature});
+    var map = L.map("map", {center: new L.LatLng(9.959049309716555,-84.085599659843965),zoom: 17,layers: [puntosLayer, lineasLayer, poligonosLayer]});
+    var overlayMaps = {"Restaurantes": puntosLayer,"Calles": lineasLayer,"Edificios": poligonosLayer};
+    L.control.layers(null, overlayMaps).addTo(map);
+    </script>
+</body>
+</html>
