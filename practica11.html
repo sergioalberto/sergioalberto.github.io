@@ -144,19 +144,12 @@
             //var circle = L.circle([51.508, -0.11], 500, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
             var circle;
             function onClick(e) {
-                //map.onRemove(circle);
-                //alert(this.options.id);
-                //marker[this.options.id].setStyle({ icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'})});
                 var i;
-
-                //marker[this.options.id].feature.properties['old-color'] = e.layer.feature.properties['marker-color'];
-                //marker[this.options.id].setColor({color:'red'}); //setStyle({icon: L.mapbox.marker.icon(color: 'red')});
-
-                //map.onRemove(circle);
-                for (i = 0; i < data1.features.length; i++) {
-                    if(i == this.options.id){
-                        //circle = L.circle([this.options.x, this.options.y], 25, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
-                    }
+                for (i = 0; i < data.features.length; i++) {
+                   lines[i].setStyle({color:'#000'});
+                }
+                for (i = 0; i < data2.features.length; i++) {
+                    polygon[i].setStyle({color: 'blue'});
                 }
             }
 
