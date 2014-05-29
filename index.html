@@ -1,165 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sergioalberto.github.io by sergioalberto</title>
 
-        <title>Practica 11 - Sergio González Q.</title>
-        <meta charset=utf-8 />
-        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-        <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
-        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-        <style>
-            body { margin:0; padding:0; }
-            #map { position:absolute; top:0; bottom:0; width:100%; }
-        </style>
-    </head>
-    <body>
-        <div id='map'></div>
-        <script>
-            var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([9.959049309716555,-84.085599659843965], 17);
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="without-description">
+        <h1>Sergioalberto.github.io</h1>
+        <p></p>
+        <p class="view"><a href="https://github.com/sergioalberto">View the Project on GitHub <small>sergioalberto</small></a></p>
+        <ul>
+          <li class="single"><a href="https://github.com/sergioalberto/sergioalberto.github.io">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-            // Define circle options
-            // http://leafletjs.com/reference.html#circle
-            var circle_options = {
-                color: '#fff',      // Stroke color
-                opacity: 1,         // Stroke opacity
-                weight: 10,         // Stroke weight
-                fillColor: '#000',  // Fill color
-                fillOpacity: 0.6    // Fill opacity
-            };
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-            // Define polyline options
-            // http://leafletjs.com/reference.html#polyline
-            var polyline_options = {
-                color: '#000',
-                weight: 10
-            };
+<pre><code>$ cd your_repo_root/repo_name
+$ git fetch origin
+$ git checkout gh-pages
+</code></pre>
 
-            var xhr = new XMLHttpRequest();
+<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
-            xhr.open("GET","calles.geojson",false);
-            xhr.send(null);
-            var data = JSON.parse(xhr.responseText);
+<h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
 
-            var lines = [];
-            var i;
-            for (i = 0; i < data.features.length; i++) {
+<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
-                // Create array of lat,lon points
-                var line_points = [
-                    [data.features[i].geometry.coordinates[0][1], data.features[i].geometry.coordinates[0][0]],
-                    [data.features[i].geometry.coordinates[1][1], data.features[i].geometry.coordinates[1][0]]];
+<h3>
+<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
-                lines[i] = new L.polyline(line_points, {
-                    color: '#000',
-                    weight: 10,
-                    idName: i      
-                });
-                lines[i].addTo(map);
-                lines[i].bindPopup(data.features[i].properties.Nombre);
-                lines[i].on('click', setColor);
-            };
+<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-            xhr.open("GET","restaurantes.geojson",false);
-            xhr.send(null);
-            var data1 = JSON.parse(xhr.responseText);
+<h3>
+<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-            var marker = [];
-            var i;
-            for (i = 0; i < data1.features.length; i++) {
-                marker[i] = new L.marker([data1.features[i].geometry.coordinates[1], data1.features[i].geometry.coordinates[0]], {
-                    id: i,
-                    icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'}),
-                    name: data1.features[i].properties.Nombre,
-                    x: data1.features[i].geometry.coordinates[1],
-                    y: data1.features[i].geometry.coordinates[0]
-                });
-                marker[i].addTo(map);
-                marker[i].bindPopup(data1.features[i].properties.Nombre);
-                marker[i].on('click', onClick);
-            };
+<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-            function setColor(e) {
-                //alert(""+this.options.idName);
-                var i;
-                for (i = 0; i < data2.features.length; i++) {
-                    polygon[i].setStyle({color: 'blue'});
-                }
-                
-                for (i = 0; i < data.features.length; i++) {
-                    if(i == this.options.idName){
-                        lines[this.options.idName].setStyle({color: 'red'});
-                    }else{
-                        lines[i].setStyle({color:'#000'});
-                    }
-                }                
-            }
+<h3>
+<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-            xhr.open("GET","edificios.geojson",false);
-            xhr.send(null);
-            var data2 = JSON.parse(xhr.responseText);
-            //alert(""+data2.features[0].geometry.coordinates[0][0][0]);
-            //alert(""+data2.features[2].geometry.coordinates[0].length);
-
-            var polygon = [];
-            var i;
-            for (i = 0; i < data2.features.length; i++) {
-                //var polygon = L.polygon([[51.509, -0.08],[51.503, -0.06],[51.51, -0.047]]).addTo(map);
-                var polygonData = new Array(data2.features[i].geometry.coordinates[0].length);
-                var j;
-                for (j = 0; j < data2.features[i].geometry.coordinates[0].length; j++) {
-                    polygonData[j] = new Array(2);
-                    //var aux = [data2.features[j].geometry.coordinates[0][0][0][1], data2.features[j].geometry.coordinates[0][0][0][0]];
-                    //alert(""+data2.features[i].geometry.coordinates[0][0][1]);
-                    polygonData[j][0] = data2.features[i].geometry.coordinates[0][j][1];
-                    polygonData[j][1] = data2.features[i].geometry.coordinates[0][j][0];
-                    //polygonData[j][1] = 3;
-                }
-                //alert(""+polygonData);
-                polygon[i] = new L.polygon(polygonData, {color: 'blue',idNamePolygon: i });
-                polygon[i].addTo(map);
-                polygon[i].bindPopup(data2.features[i].properties.Nombre);
-                polygon[i].on('click', setColorPolygon);
-            };
-
-            function setColorPolygon(e) {
-                //alert(""+this.options.idName);
-                var i;
-                for (i = 0; i < data.features.length; i++) {
-                   lines[i].setStyle({color:'#000'});
-                }
-
-                for (i = 0; i < data2.features.length; i++) {
-                    if(i == this.options.idNamePolygon){
-                        polygon[this.options.idNamePolygon].setStyle({color: 'red'});
-                    }else{
-                        polygon[i].setStyle({color:'blue'});
-                    }
-                }
-            }
-
-            //L.marker([51.495, -0.083], {icon: myIcon}).addTo(map).bindPopup("I am a red leaf.");
-            //L.marker([37.9, -77], { icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'})}).addTo(map);
-
-            //var circle = L.circle([51.508, -0.11], 500, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
-            var circle;
-            function onClick(e) {
-                //map.onRemove(circle);
-                //alert(this.options.id);
-                //marker[this.options.id].setStyle({ icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'})});
-                var i;
-
-                //marker[this.options.id].feature.properties['old-color'] = e.layer.feature.properties['marker-color'];
-                //marker[this.options.id].setColor({color:'red'}); //setStyle({icon: L.mapbox.marker.icon(color: 'red')});
-
-                //map.onRemove(circle);
-                for (i = 0; i < data1.features.length; i++) {
-                    if(i == this.options.id){
-                        //circle = L.circle([this.options.x, this.options.y], 25, {color: 'red',fillColor: '#f03',fillOpacity: 0.5}).addTo(map);
-                    }
-                }
-            }
-
-        </script>
-    </body>
+<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
 </html>
