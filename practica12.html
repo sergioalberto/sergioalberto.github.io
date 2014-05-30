@@ -47,7 +47,7 @@
     function onEachFeature(feature, layer) {layer.bindPopup(feature.properties.Nombre);};
     function onEachFeaturePoint(feature, layer) {
         layer.bindPopup(feature.properties.Nombre);
-        alert(""+feature.length);
+        alert(""+layer.id;
         //for(var i=0; i < ;i++){}
     };
     function pointToLayer(feature, latlng) {return L.marker(latlng, {icon: redMarker});};
