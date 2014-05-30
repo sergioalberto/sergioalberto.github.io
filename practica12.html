@@ -61,7 +61,7 @@
     var poligonos = JSON.parse(xhr.responseText);
     var styleLineas = {"color": "#999999","weight": 10,"opacity": 0.65};
     var stylePoligonos = {"color": "#ff7800","weight": 1,"opacity": 0.65};
-    var puntosLayer = L.geoJson(puntos, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+    var puntosLayer = L.geoJson(puntos, {onEachFeaturePoint: onEachFeaturePoint, onEachFeature: onEachFeature});
     var lineasLayer = L.geoJson(lineas, {style: styleLineas, onEachFeature: onEachFeature});
     var poligonosLayer = L.geoJson(poligonos, {style: stylePoligonos, onEachFeature: onEachFeature});
     var map = L.map("map", {center: new L.LatLng(9.959049309716555,-84.085599659843965),zoom: 17,layers: [puntosLayer, lineasLayer, poligonosLayer]});
