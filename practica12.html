@@ -45,6 +45,11 @@
     <script type="text/javascript">
     var redMarker = L.AwesomeMarkers.icon({icon: "food",color: "green",iconColor: "black"});
     function onEachFeature(feature, layer) {layer.bindPopup(feature.properties.Nombre);};
+    function onEachFeaturePoint(feature, layer) {
+        layer.bindPopup(feature.properties.Nombre);
+        alert(""+feature.length);
+        //for(var i=0; i < ;i++){}
+    };
     function pointToLayer(feature, latlng) {return L.marker(latlng, {icon: redMarker});};
     var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")|| new ActiveXObject("Microsoft.XMLHTTP");
     xhr.open("GET","restaurantes.geojson",false); 
