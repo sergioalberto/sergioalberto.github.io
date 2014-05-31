@@ -5,19 +5,53 @@
         <title>Practica 11 - Sergio González Q.</title>
         <meta charset=utf-8 />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-        <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
-        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+        <script src="https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/leaflet.awesome-markers.js"></script>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
 
         <style>
             body { margin:0; padding:0; }
             #map { position:absolute; top:0; bottom:0; width:100%; }
+            .awesome-marker {
+            background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-soft.png") no-repeat 0 0;
+            width: 35px; height: 46px;
+            position:absolute;
+            left:0; top:0;
+            display: block;
+            text-align: center;
+        }
+        .awesome-marker-shadow {
+            background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+            width: 36px; height: 16px;
+        }
+        .awesome-marker i {
+            color: #333; margin-top: 10px;
+            display: inline-block; font-size: 14px;
+        }
+        .awesome-marker .icon-white { color: #fff; }
+        .awesome-marker-icon-red { background-position: 0 0; }
+        .awesome-marker-icon-darkred { background-position: -180px 0; }
+        .awesome-marker-icon-orange { background-position: -36px 0; }
+        .awesome-marker-icon-green { background-position: -72px 0; }
+        .awesome-marker-icon-darkgreen { background-position: -252px 0; }
+        .awesome-marker-icon-blue { background-position: -108px 0; }
+        .awesome-marker-icon-darkblue { background-position: -216px 0; }
+        .awesome-marker-icon-purple { background-position: -144px 0; }
+        .awesome-marker-icon-darkpurple { background-position: -288px 0; }
+        .awesome-marker-icon-cadetblue { background-position: -324px 0; }
         </style>
     </head>
     <body>
         <div id='map'></div>
         <script>
-            var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([9.959049309716555,-84.085599659843965], 17);
+            var redMarker = L.AwesomeMarkers.icon({icon: "home",color: "green",iconColor: "black"});
+            var redMarker1 = L.AwesomeMarkers.icon({icon: "food",color: "red",iconColor: "black"});
 
+            var map = L.map('map').setView([9.959049309716555,-84.085599659843965], 17);
+
+            // add an OpenStreetMap tile layer
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
 
             var xhr = new XMLHttpRequest();
 
@@ -39,9 +73,7 @@
                     weight: 10,
                     idName: i      
                 });
-                lines[i].addTo(map);
-                lines[i].bindPopup(data.features[i].properties.Nombre);
-                lines[i].on('click', setColor);
+                lines[i].addTo(map).bindPopup(data.features[i].properties.Nombre).on('click', setColor);
             };
 
             function setColor(e) {
@@ -53,7 +85,9 @@
                 for (i = 0; i < data3.features.length; i++) {
                     linesRios[i].setStyle({color:'blue'});
                 }
-
+                for (i = 0; i < data1.features.length; i++) {
+                    marker[i].setIcon(redMarker);
+                }
                 for (i = 0; i < data.features.length; i++) {
                     if(i == this.options.idName){
                         lines[this.options.idName].setStyle({color: 'red'});
@@ -88,21 +122,23 @@
                 }
 
                 linesRios[i] = new L.polyline(line_pointsRios, {color: 'blue',weight: 10,idNameRio: i});
-                linesRios[i].addTo(map);
-                linesRios[i].bindPopup(data3.features[i].properties.Nombre);
-                linesRios[i].on('click', setColorRios);
+                linesRios[i].addTo(map).bindPopup(data3.features[i].properties.Nombre).on('click', setColorRios);
             };
 
+
             function setColorRios(e) {
-                
+                //alert("sergio");
                 var i;
+                
                 for (i = 0; i < data2.features.length; i++) {
                     polygon[i].setStyle({color: 'blue'});
                 }
                 for (i = 0; i < data.features.length; i++) {
                    lines[i].setStyle({color:'#000'});
                 }
-
+                for (i = 0; i < data1.features.length; i++) {
+                    marker[i].setIcon(redMarker);
+                }
                 for (i = 0; i < data3.features.length; i++) {
                     if(i == this.options.idNameRio){
                         linesRios[this.options.idNameRio].setStyle({color: 'red'});
@@ -117,17 +153,16 @@
 
             var marker = [];
             var i;
+            var myIcon = L.icon({
+                iconUrl: 'images/marker-icon.png',
+                iconRetinaUrl: 'images/marker-icon-2x.png',
+                iconSize: [25,41] 
+            });
             for (i = 0; i < data1.features.length; i++) {
                 marker[i] = new L.marker([data1.features[i].geometry.coordinates[1], data1.features[i].geometry.coordinates[0]], {
-                    id: i,
-                    icon: L.mapbox.marker.icon({'marker-size': 'large','marker-symbol': 'bar','marker-color': '#fa0'}),
-                    name: data1.features[i].properties.Nombre,
-                    x: data1.features[i].geometry.coordinates[1],
-                    y: data1.features[i].geometry.coordinates[0]
-                });
-                marker[i].addTo(map);
-                marker[i].bindPopup(data1.features[i].properties.Nombre);
-                marker[i].on('click', onClick);
+                    idRestaurante: i,
+                    icon: redMarker
+                }).addTo(map).bindPopup(data1.features[i].properties.Nombre).on('click', onClick);
             };
 
             function onClick(e) {
@@ -140,6 +175,16 @@
                 }
                 for (i = 0; i < data3.features.length; i++) {
                     linesRios[i].setStyle({color:'blue'});
+                }
+
+                for (i = 0; i < data1.features.length; i++) {
+                    if(i == this.options.idRestaurante){
+                        //alert(this.options.idRestaurante);
+                        marker[this.options.idRestaurante].setIcon(redMarker1);
+                        //e.setIcon(redMarker1);
+                    }else{
+                        marker[i].setIcon(redMarker);
+                    }
                 }
             }
 
@@ -178,7 +223,9 @@
                 for (i = 0; i < data3.features.length; i++) {
                     linesRios[i].setStyle({color:'blue'});
                 }
-
+                for (i = 0; i < data1.features.length; i++) {
+                    marker[i].setIcon(redMarker);
+                }
                 for (i = 0; i < data2.features.length; i++) {
                     if(i == this.options.idNamePolygon){
                         polygon[this.options.idNamePolygon].setStyle({color: 'red'});
