@@ -235,6 +235,24 @@
                 }
             }
 
+            map.on('click', reset);
+
+    function reset(e){
+      var i;
+        for (i = 0; i < data.features.length; i++) {
+           lines[i].setStyle({color:'#000'});
+        }
+        for (i = 0; i < data3.features.length; i++) {
+            linesRios[i].setStyle({color:'blue'});
+        }
+        for (i = 0; i < data1.features.length; i++) {
+            marker[i].setIcon(redMarker);
+        }
+        for (i = 0; i < data2.features.length; i++) {
+          polygon[i].setStyle({color:'blue'});
+        }
+    }
+
         </script>
     </body>
 </html>

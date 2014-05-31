@@ -1,80 +1,274 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset=utf-8 />
-        <meta http-equiv="Content-Type" content="text/html">
-        <title>Practica 12 - Sergio González Q.</title>
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
-        <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-        <script src="https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/leaflet.awesome-markers.js"></script>
+<head>
+  <title>Practica 12 - Sergio González Q.</title>
+  <meta charset=utf-8 />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 
+  <script src="groupedlayercontrol.js"></script>
+  <script src="https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/leaflet.awesome-markers.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+  
+  <style type="text/css">
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
 
-        <style type="text/css">
-        #map { width: 1000px; height: 600px }
-        .awesome-marker {
-            background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-soft.png") no-repeat 0 0;
-            width: 35px; height: 46px;
-            position:absolute;
-            left:0; top:0;
-            display: block;
-            text-align: center;
-        }
-        .awesome-marker-shadow {
-            background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
-            width: 36px; height: 16px;
-        }
-        .awesome-marker i {
-            color: #333; margin-top: 10px;
-            display: inline-block; font-size: 14px;
-        }
-        .awesome-marker .icon-white { color: #fff; }
-        .awesome-marker-icon-red { background-position: 0 0; }
-        .awesome-marker-icon-darkred { background-position: -180px 0; }
-        .awesome-marker-icon-orange { background-position: -36px 0; }
-        .awesome-marker-icon-green { background-position: -72px 0; }
-        .awesome-marker-icon-darkgreen { background-position: -252px 0; }
-        .awesome-marker-icon-blue { background-position: -108px 0; }
-        .awesome-marker-icon-darkblue { background-position: -216px 0; }
-        .awesome-marker-icon-purple { background-position: -144px 0; }
-        .awesome-marker-icon-darkpurple { background-position: -288px 0; }
-        .awesome-marker-icon-cadetblue { background-position: -324px 0; }
-        </style>
-    </head>
+    .leaflet-control-layers-group-name {
+      font-weight: bold;
+      margin-bottom: .2em;
+      display: block;
+    }
+
+    .leaflet-control-layers-group {
+      margin-bottom: .5em;
+    }
+
+    .leaflet-control-layers-group label {
+      padding-left: .5em;
+    }
+    .awesome-marker {
+      background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-soft.png") no-repeat 0 0;
+      width: 35px; height: 46px;
+      position:absolute;
+      left:0; top:0;
+      display: block;
+      text-align: center;
+    }
+    .awesome-marker-shadow {
+      background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+      width: 36px; height: 16px;
+    }
+    .awesome-marker i {
+      color: #333; margin-top: 10px;
+      display: inline-block; font-size: 14px;
+    }
+    .awesome-marker .icon-white { color: #fff; }
+    .awesome-marker-icon-red { background-position: 0 0; }
+    .awesome-marker-icon-darkred { background-position: -180px 0; }
+    .awesome-marker-icon-orange { background-position: -36px 0; }
+    .awesome-marker-icon-green { background-position: -72px 0; }
+    .awesome-marker-icon-darkgreen { background-position: -252px 0; }
+    .awesome-marker-icon-blue { background-position: -108px 0; }
+    .awesome-marker-icon-darkblue { background-position: -216px 0; }
+    .awesome-marker-icon-purple { background-position: -144px 0; }
+    .awesome-marker-icon-darkpurple { background-position: -288px 0; }
+    .awesome-marker-icon-cadetblue { background-position: -324px 0; }
+
+  </style>
+</head>
 <body>
-    <div id="map"></div>
-    <script type="text/javascript">
-    var redMarker = L.AwesomeMarkers.icon({icon: "food",color: "green",iconColor: "black"});
-    function onEachFeature(feature, layer) {layer.bindPopup(feature.properties.Nombre);};
-    function onEachFeaturePoint(feature, layer) {
-        layer.bindPopup(feature.properties.Nombre);
 
-        alert(""+feature.properties.id);
-        //for(var i=0; i < ;i++){}
-    };
-    function pointToLayer(feature, latlng) {return L.marker(latlng, {icon: redMarker});};
-    var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")|| new ActiveXObject("Microsoft.XMLHTTP");
-    xhr.open("GET","restaurantes.geojson",false); 
+  <div id="map"></div>
+
+  <script type="text/javascript">
+
+    var redMarker = L.AwesomeMarkers.icon({icon: "home",color: "green",iconColor: "black"});
+    var redMarker1 = L.AwesomeMarkers.icon({icon: "food",color: "red",iconColor: "black"});
+
+    var xhr = new XMLHttpRequest();
+
+    var calles = new L.LayerGroup();
+
+    xhr.open("GET","calles.geojson",false);
     xhr.send(null);
-    var puntos = JSON.parse(xhr.responseText);
+    var data = JSON.parse(xhr.responseText);
+
+    var lines = [];
+    var i;
+    for (i = 0; i < data.features.length; i++) {
+      // Create array of lat,lon points
+      var line_points = [
+        [data.features[i].geometry.coordinates[0][1], data.features[i].geometry.coordinates[0][0]],
+        [data.features[i].geometry.coordinates[1][1], data.features[i].geometry.coordinates[1][0]]];
+
+      lines[i] = new L.polyline(line_points, {color: '#000', weight: 10, idName: i}).bindPopup(data.features[i].properties.Nombre).addTo(calles).on('click', setColor);
+    };
+
+    function setColor(e) {
+                
+      var i;
+      for (i = 0; i < data2.features.length; i++) {
+          polygon[i].setStyle({color: 'blue'});
+      }
+      for (i = 0; i < data3.features.length; i++) {
+          linesRios[i].setStyle({color:'blue'});
+      }
+      for (i = 0; i < data1.features.length; i++) {
+          marker[i].setIcon(redMarker);
+      }
+      for (i = 0; i < data.features.length; i++) {
+          if(i == this.options.idName){
+              lines[this.options.idName].setStyle({color: 'red'});
+          }else{
+              lines[i].setStyle({color:'#000'});
+          }
+      }                
+  }
+
+    var restaurants = new L.LayerGroup();
+    xhr.open("GET","restaurantes.geojson",false);
+    xhr.send(null);
+    var data1 = JSON.parse(xhr.responseText);
+    var marker = [];
+    var i;
+    for (i = 0; i < data1.features.length; i++) {
+      marker[i] = new L.marker([data1.features[i].geometry.coordinates[1], data1.features[i].geometry.coordinates[0]], {
+        idRestaurante: i,
+        icon: redMarker
+      }).addTo(restaurants).bindPopup(data1.features[i].properties.Nombre).on('click', onClick);
+    };
+
+    function onClick(e) {
+        var i;
+        for (i = 0; i < data.features.length; i++) {
+           lines[i].setStyle({color:'#000'});
+        }
+        for (i = 0; i < data2.features.length; i++) {
+            polygon[i].setStyle({color: 'blue'});
+        }
+        for (i = 0; i < data3.features.length; i++) {
+            linesRios[i].setStyle({color:'blue'});
+        }
+        for (i = 0; i < data1.features.length; i++) {
+            if(i == this.options.idRestaurante){
+                marker[this.options.idRestaurante].setIcon(redMarker1);
+                
+            }else{
+                marker[i].setIcon(redMarker);
+            }
+        }
+    }
+
+    var rios = new L.LayerGroup();
+    xhr.open("GET","rios.geojson",false);
+    xhr.send(null);
+    var data3 = JSON.parse(xhr.responseText);
+
+    var linesRios = [];
+    var i;
+    for (i = 0; i < data3.features.length; i++) {
+
+        // Create array of lat,lon points
+        var line_pointsRios = [
+            [data3.features[i].geometry.coordinates[0][1], data.features[i].geometry.coordinates[0][0]],
+            [data3.features[i].geometry.coordinates[1][1], data.features[i].geometry.coordinates[1][0]]];
+
+        var line_pointsRios = new Array(data3.features[i].geometry.coordinates.length);
+        var j;
+        for (j = 0; j < data3.features[i].geometry.coordinates.length; j++) {
+            line_pointsRios[j] = new Array(2);
+            
+            line_pointsRios[j][0] = data3.features[i].geometry.coordinates[j][1];
+            line_pointsRios[j][1] = data3.features[i].geometry.coordinates[j][0];
+            
+        }
+
+        linesRios[i] = new L.polyline(line_pointsRios, {color: 'blue',weight: 10,idNameRio: i});
+        linesRios[i].addTo(rios).bindPopup(data3.features[i].properties.Nombre).on('click', setColorRios);
+    };
+
+
+    function setColorRios(e) {
+        var i;
+        
+        for (i = 0; i < data2.features.length; i++) {
+            polygon[i].setStyle({color: 'blue'});
+        }
+        for (i = 0; i < data.features.length; i++) {
+           lines[i].setStyle({color:'#000'});
+        }
+        for (i = 0; i < data1.features.length; i++) {
+            marker[i].setIcon(redMarker);
+        }
+        for (i = 0; i < data3.features.length; i++) {
+            if(i == this.options.idNameRio){
+                linesRios[this.options.idNameRio].setStyle({color: 'red'});
+            }else{
+                linesRios[i].setStyle({color:'blue'});
+            }
+        }                
+    }
+
+    var edificios = new L.LayerGroup();
+    xhr.open("GET","edificios.geojson",false);
+    xhr.send(null);
+    var data2 = JSON.parse(xhr.responseText);
+
+    var polygon = [];
+    var i;
+    for (i = 0; i < data2.features.length; i++) {
+        var polygonData = new Array(data2.features[i].geometry.coordinates[0].length);
+        var j;
+        for (j = 0; j < data2.features[i].geometry.coordinates[0].length; j++) {
+            polygonData[j] = new Array(2);
+            polygonData[j][0] = data2.features[i].geometry.coordinates[0][j][1];
+            polygonData[j][1] = data2.features[i].geometry.coordinates[0][j][0];
+        }
+        
+        polygon[i] = new L.polygon(polygonData, {color: 'blue',idNamePolygon: i });
+        polygon[i].addTo(edificios);
+        polygon[i].bindPopup(data2.features[i].properties.Nombre);
+        polygon[i].on('click', setColorPolygon);
+    };
+
+    function setColorPolygon(e) {
+        //alert(""+this.options.idName);
+        var i;
+        for (i = 0; i < data.features.length; i++) {
+           lines[i].setStyle({color:'#000'});
+        }
+
+        for (i = 0; i < data3.features.length; i++) {
+            linesRios[i].setStyle({color:'blue'});
+        }
+        for (i = 0; i < data1.features.length; i++) {
+            marker[i].setIcon(redMarker);
+        }
+        for (i = 0; i < data2.features.length; i++) {
+            if(i == this.options.idNamePolygon){
+                polygon[this.options.idNamePolygon].setStyle({color: 'red'});
+            }else{
+                polygon[i].setStyle({color:'blue'});
+            }
+        }
+    }
+
+
+    var map = L.map('map', {center: [9.959049309716555,-84.085599659843965], zoom: 17, layers: [restaurants, calles, rios, edificios]});
     
-    xhr.open("GET","calles.geojson",false); xhr.send(null);
-    var lineas = JSON.parse(xhr.responseText);
+    // add an OpenStreetMap tile layer
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+
+    // Overlay layers are grouped
+    var groupedOverlays = {
+      "Calles": calles,
+      "Restaurants": restaurants,
+      "Edificios": edificios,
+      "Rios": rios
+    };
     
-    xhr.open("GET","edificios.geojson",false); xhr.send(null);
-    var poligonos = JSON.parse(xhr.responseText);
+    L.control.layers(null, groupedOverlays).addTo(map);
     
-    var styleLineas = {"color": "#999999","weight": 10,"opacity": 0.65};
-    var stylePoligonos = {"color": "#ff7800","weight": 1,"opacity": 0.65};
-    
-    var puntosLayer = L.geoJson(puntos, {pointToLayer: pointToLayer, onEachFeature: onEachFeaturePoint});
-    var lineasLayer = L.geoJson(lineas, {style: styleLineas, onEachFeature: onEachFeature});
-    var poligonosLayer = L.geoJson(poligonos, {style: stylePoligonos, onEachFeature: onEachFeature});
-    
-    var map = L.map("map", {center: new L.LatLng(9.959049309716555,-84.085599659843965),zoom: 17,layers: [puntosLayer, lineasLayer, poligonosLayer]});
-    
-    var overlayMaps = {"Restaurantes": puntosLayer,"Calles": lineasLayer,"Edificios": poligonosLayer};
-    
-    L.control.layers(null, overlayMaps).addTo(map);
-    </script>
+    map.on('click', reset);
+
+    function reset(e){
+      var i;
+        for (i = 0; i < data.features.length; i++) {
+           lines[i].setStyle({color:'#000'});
+        }
+        for (i = 0; i < data3.features.length; i++) {
+            linesRios[i].setStyle({color:'blue'});
+        }
+        for (i = 0; i < data1.features.length; i++) {
+            marker[i].setIcon(redMarker);
+        }
+        for (i = 0; i < data2.features.length; i++) {
+          polygon[i].setStyle({color:'blue'});
+        }
+    }
+
+  </script>
 </body>
 </html>
