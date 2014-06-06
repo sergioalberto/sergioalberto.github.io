@@ -1,0 +1,19 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "id": 2, "Nombre": "Iglesia de San Juan", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.342610721318707, 9.84334124381836 ] } },
+{ "type": "Feature", "properties": { "id": 1, "Nombre": "Antigua Iglesia de Santiago", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.314879173045483, 9.846614224692932 ] } },
+{ "type": "Feature", "properties": { "id": 12, "Nombre": "Iglesia de Pozos", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.292704810055696, 9.804620354404552 ] } },
+{ "type": "Feature", "properties": { "id": 11, "Nombre": "Iglesia de Bajo Murillo", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.342584651135212, 9.833825046352844 ] } },
+{ "type": "Feature", "properties": { "id": 10, "Nombre": "Iglesia de Mercedes Norte", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.326783667327518, 9.835960096565957 ] } },
+{ "type": "Feature", "properties": { "id": 9, "Nombre": "Iglesia de Floralia", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.275678973676577, 9.816058349961724 ] } },
+{ "type": "Feature", "properties": { "id": 8, "Nombre": "Iglesia de Piedades", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.362160573224742, 9.865477961615113 ] } },
+{ "type": "Feature", "properties": { "id": 7, "Nombre": "Iglesia de Grifo Alto", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.389197972002918, 9.877142368729245 ] } },
+{ "type": "Feature", "properties": { "id": 6, "Nombre": "Iglesia Desamparaditos", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.339576468088893, 9.877802744250991 ] } },
+{ "type": "Feature", "properties": { "id": 5, "Nombre": "Iglesia Nuevas Cosechas", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.316248332107548, 9.844431677955321 ] } },
+{ "type": "Feature", "properties": { "id": 4, "Nombre": "Iglesia Jesucristo de los Ultimos Dias", "TIPO": null }, "geometry": { "type": "Point", "coordinates": [ -84.311720974110699, 9.847643698423861 ] } },
+{ "type": "Feature", "properties": { "id": 3, "Nombre": "Iglesia De Barbacoas", "TIPO": "Iglesia" }, "geometry": { "type": "Point", "coordinates": [ -84.348911248679642, 9.858188575608006 ] } }
+]
+}

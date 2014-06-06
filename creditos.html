@@ -1,0 +1,272 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>Puriscal</title>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+
+		<script src="leaflet.js"></script>
+		<script src="leaflet.awesome-markers.js"></script>
+
+		<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.css' rel='stylesheet' />
+
+		<style type="text/css">
+		/* Global properties ======================================================== */
+		html, body {
+			width:100%; 
+			padding:0; 
+			margin:0; 
+		}
+		body {
+			font:14px/25px Arial,Helvetica,sans-serif;
+			color:#939393;
+			background:#fff
+		}
+		#pagina{margin:0 auto; width:100%;}
+
+		#header{width:100%; height:auto; float:left;}
+		#title{width:100%; height:auto; float:left; background:#272727;}
+		#creditos{width:20%; height:auto; float:right; background:#272727;}
+		#title1{width:100%; height:auto; float:left; background:#272727;}
+		#menu{width:100%; height:auto; float:left; background:#272727;}
+		#menu1{width:25%; height:auto; float:left; background:#272727;}
+		#content{width:100%; float:left;}
+		#map {width:100%; height:500px}
+		#footer{
+			background:#131313;
+   			width:100%;
+   			height:auto;
+   			float:left;
+   			text-align:center;
+		}
+		#footer p, #footer a {color:#939393;}
+		#footer a:hover {text-decoration:underline;}
+
+		.creditos {overflow:hidden; text-align:left;}
+		.creditos a {color:#939393;}
+		.creditos a:hover {text-decoration:underline;}
+		
+		h2 { font-size:36px; line-height:45px; color:#fff; font-weight:normal; letter-spacing:-1px; text-shadow: black 5px 5px 4px;}
+		h3 { font-size:20px; line-height:20px; color:#fff; font-weight:normal; }
+		.awesome-marker {
+			background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-soft.png") no-repeat 0 0;
+			width: 35px; height: 46px;
+			position:absolute;
+			left:0; top:0;
+			display: block;
+			text-align: center;
+		}
+		.awesome-marker-shadow {
+			background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+			width: 36px; height: 16px;
+		}
+		.awesome-marker i {
+			color: #333; margin-top: 10px;
+			display: inline-block; font-size: 14px;
+		}
+		.awesome-marker .icon-white { color: #fff; }
+		.awesome-marker-icon-red { background-position: 0 0; }
+		.awesome-marker-icon-darkred { background-position: -180px 0; }
+		.awesome-marker-icon-orange { background-position: -36px 0; }
+		.awesome-marker-icon-green { background-position: -72px 0; }
+		.awesome-marker-icon-darkgreen { background-position: -252px 0; }
+		.awesome-marker-icon-blue { background-position: -108px 0; }
+		.awesome-marker-icon-darkblue { background-position: -216px 0; }
+		.awesome-marker-icon-purple { background-position: -144px 0; }
+		.awesome-marker-icon-darkpurple { background-position: -288px 0; }
+		.awesome-marker-icon-cadetblue { background-position: -324px 0; }
+
+		/* Adjustments to account for mapbox.css box-sizing rules */
+		.leaflet-control-zoomslider-knob { width:14px; height:6px; }
+		.leaflet-container .leaflet-control-zoomslider-body {-webkit-box-sizing:content-box;-moz-box-sizing:content-box; box-sizing:content-box;}
+
+		#form { margin: 0px 0 0px 0px;}
+		
+		#form label {position:relative;overflow:hidden; display: block; padding-bottom:12px;}
+		#form label strong {font-weight:normal; display:block; padding-bottom:5px;}
+
+		</style>
+	</head>
+<body>
+	
+	<div id="pagina">
+		<div id="header">
+			<div id="title">
+				<div id="creditos">
+					<div class="creditos"><a href="creditos.html">Créditos</a></div>
+				</div>
+			</div>
+			<div id="title1">
+				<h2 align="center">¡Bienvenid@ al cantón de Puriscal!</h2>
+			</div>
+			<div id="menu">
+				<h3 align="center">Sistemas de Información Geográfica:</h3>
+				<p align="center">Sergio A. González Quirós - 200934649 - Estudiante de Ingeniería en Computadores.</p>
+				<p align="center">Edward Jiménez Retana - 200859831 - Estudiante de Ingeniería en Computadores.</p>
+			</div>
+		</div>
+		<div id="content">
+			<div id="map">
+
+			</div>
+		</div>
+		<div id="footer">
+			<p>© 2014 <a href="proyecto.html" >Puriscal</a>. Todos los derechos reservados.<br>
+			Estudiante de Ingeniería en Computadores.<br>
+			Costa Rica, Cartago, TEC.<br> </p>
+    	</footer>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	var redMarker = L.AwesomeMarkers.icon({icon: "food",color: "green",iconColor: "black"});
+	var redMarker1 = L.AwesomeMarkers.icon({icon: "food",color: "red",iconColor: "black"});
+	function onEachFeature(feature, layer) {layer.bindPopup(feature.properties.Nombre);
+		
+		layer.on({
+			
+			click: highlightFeature
+		});
+	};
+	function pointToLayer(feature, latlng) {return L.marker(latlng, {icon: redMarker});};
+	var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")|| new ActiveXObject("Microsoft.XMLHTTP");
+	
+	//Capa de servicios de Comercios
+	xhr.open("GET","datos/Servicio de Comercio.geojson",false); 
+	xhr.send(null);
+	var puntosComercios = JSON.parse(xhr.responseText);
+	
+	//capa de caminos
+	xhr.open("GET","datos/CaminosBuffer.geojson",false); 
+	xhr.send(null);
+	var poligonos = JSON.parse(xhr.responseText);
+	
+	//capa de servicios de Salud
+	xhr.open("GET","datos/Servicio de Salud.geojson",false); 
+	xhr.send(null);
+	var puntosSalud = JSON.parse(xhr.responseText);
+	
+	//capa de Puentes
+	xhr.open("GET","datos/Puente2.geojson",false); 
+	xhr.send(null);
+	var Puente = JSON.parse(xhr.responseText);
+	
+	//capa de Rios
+	xhr.open("GET","datos/Rios.geojson",false); 
+	xhr.send(null);
+	var rio = JSON.parse(xhr.responseText);
+	
+	//capa de Edificos Publicos
+	xhr.open("GET","datos/Edificos Publicos.geojson",false); 
+	xhr.send(null);
+	var EdificosPublicos = JSON.parse(xhr.responseText);
+	
+	//capa de Instalaciones publicas
+	xhr.open("GET","datos/Instalaciones publicas.geojson",false); 
+	xhr.send(null);
+	var InstalacionesPublicas = JSON.parse(xhr.responseText);
+	
+	//capa de Distritos
+	xhr.open("GET","datos/Distritos.geojson",false); 
+	xhr.send(null);
+	var Distritos = JSON.parse(xhr.responseText);
+	
+	//Estilos
+	
+	//Estilo caminos
+	var styleCaminos = {"color": "orange","weight": 1,"opacity": 0.65};
+	//Estilo distritos
+	var styleEdificosPublicos = {"color": "yellow","weight": 1,"opacity": 0.5};
+	//Estilo distritos
+	var styleDistrito = {"color": "violet","weight": 1,"opacity": 0.65};
+	//Estilo Rios
+	var styleRio = {"color": "blue","weight": 1,"opacity": 0.65};
+	//Estilo Instalaciones Publicas
+	var styleInstalacionesPublicas = {"color": "green","weight": 1,"opacity": 0.5};
+	//Layers
+	var puntosLayer = L.geoJson(puntosComercios, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerPuente = L.geoJson(Puente, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerSalud = L.geoJson(puntosSalud, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerEdificosPublicos = L.geoJson(EdificosPublicos, {style:styleEdificosPublicos,onEachFeature: onEachFeature});
+	var puntosLayerDistritos = L.geoJson(Distritos, {style:styleDistrito,onEachFeature: onEachFeature});
+	var LayerInstalacionesPublicas = L.geoJson(InstalacionesPublicas, {style:styleInstalacionesPublicas,onEachFeature: onEachFeature});
+	var RioLayer = L.geoJson(rio, {style:styleRio,onEachFeature: onEachFeature});
+	var poligonosCaminos = L.geoJson(poligonos, {style: styleCaminos,onEachFeature: onEachFeature});
+	
+	//Mapa
+	var map = L.map("map", {center: new L.LatLng(9.76776,-84.40632), zoomslider:false, zoom: 11,layers: [puntosLayerDistritos, puntosLayer,puntosLayerSalud,
+							puntosLayerEdificosPublicos]});
+	
+	// add an OpenStreetMap tile layer
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+
+	//Para Agregar Capas
+	var overlayMaps = {"Comercios": puntosLayer,"Caminos": poligonosCaminos,"Rios":RioLayer, "Centros de salud":puntosLayerSalud,
+						"Edificios": puntosLayerEdificosPublicos, "Distritos": puntosLayerDistritos, "Instalaciones":LayerInstalacionesPublicas,
+						"Puentes": puntosLayerPuente};
+
+	L.control.layers(null, overlayMaps).addTo(map);
+	L.control.zoomslider().addTo(map);
+
+	
+	//Funcio para resaltar el color uno de los iconos seleccionados.
+	function highlightFeature(e) {
+		var layer = e.target;
+		resetHighlight(e);
+		if(e.target.feature.geometry.type == "Point")
+		{
+			layer.setIcon(redMarker1);
+		}
+	
+		else
+		{
+			layer.setStyle({
+				weight: 6,
+				color: '#666',
+				opacity: 0.65
+			});
+		
+		
+		
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				layer.bringToFront();
+			}
+		}
+	}
+	
+	function resetHighlight(e) {
+		if(e.target.feature.geometry.type == "Point")
+		{
+			for(var indice in puntosLayer._layers)
+			{
+				if(puntosLayer._layers[indice]!= e)
+				{
+					puntosLayer._layers[indice].setIcon(redMarker);
+				}
+			}
+		}
+		else
+		{
+			lineasLayer.setStyle({
+				weight: 4,
+				color: "#999999",
+				dashArray: '',
+				fillOpacity: 0.65
+			});
+			poligonosCaminos.setStyle({
+				weight: 1,
+				color: 'orange',
+				opacity: 0.65
+			});
+			RioLayer.setStyle({
+				weight: 1,
+				color: 'blue',
+				opacity: 0.65
+			});
+		}
+	}
+	</script>
+</body>
+</html>
