@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "id": 31, "Nombre": "Ebais #4", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.348698462722538, 9.858692170085929 ] } },
+{ "type": "Feature", "properties": { "id": 41, "Nombre": "Clinica Dental Lopez", "Tipo": "Odontologia" }, "geometry": { "type": "Point", "coordinates": [ -84.314394186824956, 9.845844230169632 ] } },
+{ "type": "Feature", "properties": { "id": 30, "Nombre": "Opticas La Luz", "Tipo": "Optica" }, "geometry": { "type": "Point", "coordinates": [ -84.31174400951771, 9.846691051830286 ] } },
+{ "type": "Feature", "properties": { "id": 46, "Nombre": "Opticas Pruriscal", "Tipo": "Optica" }, "geometry": { "type": "Point", "coordinates": [ -84.316120975582237, 9.847986337815579 ] } },
+{ "type": "Feature", "properties": { "id": 15, "Nombre": "Clinica P Charpentier", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.316147060004553, 9.847755037119567 ] } },
+{ "type": "Feature", "properties": { "id": 40, "Nombre": "Clinica Dental Sofia", "Tipo": "Clinica Odontologica" }, "geometry": { "type": "Point", "coordinates": [ -84.313245168021993, 9.847981197801881 ] } },
+{ "type": "Feature", "properties": { "id": 7, "Nombre": "Cais", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.290867342117636, 9.860946627718823 ] } },
+{ "type": "Feature", "properties": { "id": 9, "Nombre": "Cruz Roja de la Gloria", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.440335646756296, 9.66385857513554 ] } },
+{ "type": "Feature", "properties": { "id": 6, "Nombre": "Ebais de Mercedes Norte", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.319802791792682, 9.844385417349468 ] } },
+{ "type": "Feature", "properties": { "id": 4, "Nombre": "Cruz Roja", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.314385709388489, 9.847747005840473 ] } },
+{ "type": "Feature", "properties": { "id": 6, "Nombre": "Ebais#4", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.348694550058994, 9.85868542403454 ] } },
+{ "type": "Feature", "properties": { "id": 4, "Nombre": "Ebais#2", "Tipo": "Clinica" }, "geometry": { "type": "Point", "coordinates": [ -84.310285238203264, 9.847443744675381 ] } },
+{ "type": "Feature", "properties": { "id": 3, "Nombre": "Farmacia Mendez", "Tipo": "Farmacia" }, "geometry": { "type": "Point", "coordinates": [ -84.314932178038177, 9.846037945633487 ] } },
+{ "type": "Feature", "properties": { "id": 5, "Nombre": "San Miguel Arcangel", "Tipo": "Clinica Odontologica" }, "geometry": { "type": "Point", "coordinates": [ -84.313654041344861, 9.845863184091066 ] } }
+]
+}

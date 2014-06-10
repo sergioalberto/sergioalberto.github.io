@@ -1,0 +1,811 @@
+.awesome-marker {
+	background: url("markers-soft.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-marker-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-marker i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-marker-icon-white { color: #fff; }
+.awesome-marker-icon-red { background-position: 0 0; }
+.awesome-marker-icon-darkred { background-position: -180px 0; }
+.awesome-marker-icon-orange { background-position: -36px 0; }
+.awesome-marker-icon-green { background-position: -72px 0; }
+.awesome-marker-icon-darkgreen { background-position: -252px 0; }
+.awesome-marker-icon-blue { background-position: -108px 0; }
+.awesome-marker-icon-darkblue { background-position: -216px 0; }
+.awesome-marker-icon-purple { background-position: -144px 0; }
+.awesome-marker-icon-darkpurple { background-position: -288px 0; }
+.awesome-marker-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerEscuela {
+	background: url("markers-softEscuela.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerEscuela-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerEscuela i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerEscuela-icon-white { color: #fff; }
+.awesome-markerEscuela-icon-red { background-position: 0 0; }
+.awesome-markerEscuela-icon-darkred { background-position: -180px 0; }
+.awesome-markerEscuela-icon-orange { background-position: -36px 0; }
+.awesome-markerEscuela-icon-green { background-position: -72px 0; }
+.awesome-markerEscuela-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerEscuela-icon-blue { background-position: -108px 0; }
+.awesome-markerEscuela-icon-darkblue { background-position: -216px 0; }
+.awesome-markerEscuela-icon-purple { background-position: -144px 0; }
+.awesome-markerEscuela-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerEscuela-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerFerreteria {
+	background: url("markers-softFerreteria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerFerreteria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerFerreteria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerFerreteria-icon-white { color: #fff; }
+.awesome-markerFerreteria-icon-red { background-position: 0 0; }
+.awesome-markerFerreteria-icon-darkred { background-position: -180px 0; }
+.awesome-markerFerreteria-icon-orange { background-position: -36px 0; }
+.awesome-markerFerreteria-icon-green { background-position: -72px 0; }
+.awesome-markerFerreteria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerFerreteria-icon-blue { background-position: -108px 0; }
+.awesome-markerFerreteria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerFerreteria-icon-purple { background-position: -144px 0; }
+.awesome-markerFerreteria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerFerreteria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerHidrante {
+	background: url("markers-softHidrante.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerHidrante-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerHidrante i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerHidrante-icon-white { color: #fff; }
+.awesome-markerHidrante-icon-red { background-position: 0 0; }
+.awesome-markerHidrante-icon-darkred { background-position: -180px 0; }
+.awesome-markerHidrante-icon-orange { background-position: -36px 0; }
+.awesome-markerHidrante-icon-green { background-position: -72px 0; }
+.awesome-markerHidrante-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerHidrante-icon-blue { background-position: -108px 0; }
+.awesome-markerHidrante-icon-darkblue { background-position: -216px 0; }
+.awesome-markerHidrante-icon-purple { background-position: -144px 0; }
+.awesome-markerHidrante-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerHidrante-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerPanaderia {
+	background: url("markers-softPanaderia.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerPanaderia-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerPanaderia i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerPanaderia-icon-white { color: #fff; }
+.awesome-markerPanaderia-icon-red { background-position: 0 0; }
+.awesome-markerPanaderia-icon-darkred { background-position: -180px 0; }
+.awesome-markerPanaderia-icon-orange { background-position: -36px 0; }
+.awesome-markerPanaderia-icon-green { background-position: -72px 0; }
+.awesome-markerPanaderia-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerPanaderia-icon-blue { background-position: -108px 0; }
+.awesome-markerPanaderia-icon-darkblue { background-position: -216px 0; }
+.awesome-markerPanaderia-icon-purple { background-position: -144px 0; }
+.awesome-markerPanaderia-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerPanaderia-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerParada {
+	background: url("markers-softParada.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerParada-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerParada i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerParada-icon-white { color: #fff; }
+.awesome-markerParada-icon-red { background-position: 0 0; }
+.awesome-markerParada-icon-darkred { background-position: -180px 0; }
+.awesome-markerParada-icon-orange { background-position: -36px 0; }
+.awesome-markerParada-icon-green { background-position: -72px 0; }
+.awesome-markerParada-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerParada-icon-blue { background-position: -108px 0; }
+.awesome-markerParada-icon-darkblue { background-position: -216px 0; }
+.awesome-markerParada-icon-purple { background-position: -144px 0; }
+.awesome-markerParada-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerParada-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerSemafaro {
+	background: url("markers-softSemafaro.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerSemafaro-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerSemafaro i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerSemafaro-icon-white { color: #fff; }
+.awesome-markerSemafaro-icon-red { background-position: 0 0; }
+.awesome-markerSemafaro-icon-darkred { background-position: -180px 0; }
+.awesome-markerSemafaro-icon-orange { background-position: -36px 0; }
+.awesome-markerSemafaro-icon-green { background-position: -72px 0; }
+.awesome-markerSemafaro-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerSemafaro-icon-blue { background-position: -108px 0; }
+.awesome-markerSemafaro-icon-darkblue { background-position: -216px 0; }
+.awesome-markerSemafaro-icon-purple { background-position: -144px 0; }
+.awesome-markerSemafaro-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerSemafaro-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerPuentes {
+	background: url("markers-softPuentes.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerPuentes-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerPuentes i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerPuentes-icon-white { color: #fff; }
+.awesome-markerPuentes-icon-red { background-position: 0 0; }
+.awesome-markerPuentes-icon-darkred { background-position: -180px 0; }
+.awesome-markerPuentes-icon-orange { background-position: -36px 0; }
+.awesome-markerPuentes-icon-green { background-position: -72px 0; }
+.awesome-markerPuentes-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerPuentes-icon-blue { background-position: -108px 0; }
+.awesome-markerPuentes-icon-darkblue { background-position: -216px 0; }
+.awesome-markerPuentes-icon-purple { background-position: -144px 0; }
+.awesome-markerPuentes-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerPuentes-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerBanco {
+	background: url("markers-softBanco.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerBanco-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerBanco i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerBanco-icon-white { color: #fff; }
+.awesome-markerBanco-icon-red { background-position: 0 0; }
+.awesome-markerBanco-icon-darkred { background-position: -180px 0; }
+.awesome-markerBanco-icon-orange { background-position: -36px 0; }
+.awesome-markerBanco-icon-green { background-position: -72px 0; }
+.awesome-markerBanco-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerBanco-icon-blue { background-position: -108px 0; }
+.awesome-markerBanco-icon-darkblue { background-position: -216px 0; }
+.awesome-markerBanco-icon-purple { background-position: -144px 0; }
+.awesome-markerBanco-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerBanco-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerCiclo {
+	background: url("markers-softCiclo.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerCiclo-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerCiclo i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerCiclo-icon-white { color: #fff; }
+.awesome-markerCiclo-icon-red { background-position: 0 0; }
+.awesome-markerCiclo-icon-darkred { background-position: -180px 0; }
+.awesome-markerCiclo-icon-orange { background-position: -36px 0; }
+.awesome-markerCiclo-icon-green { background-position: -72px 0; }
+.awesome-markerCiclo-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerCiclo-icon-blue { background-position: -108px 0; }
+.awesome-markerCiclo-icon-darkblue { background-position: -216px 0; }
+.awesome-markerCiclo-icon-purple { background-position: -144px 0; }
+.awesome-markerCiclo-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerCiclo-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerConfiteria {
+	background: url("markers-softConfiteria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerConfiteria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerConfiteria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerConfiteria-icon-white { color: #fff; }
+.awesome-markerConfiteria-icon-red { background-position: 0 0; }
+.awesome-markerConfiteria-icon-darkred { background-position: -180px 0; }
+.awesome-markerConfiteria-icon-orange { background-position: -36px 0; }
+.awesome-markerConfiteria-icon-green { background-position: -72px 0; }
+.awesome-markerConfiteria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerConfiteria-icon-blue { background-position: -108px 0; }
+.awesome-markerConfiteria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerConfiteria-icon-purple { background-position: -144px 0; }
+.awesome-markerConfiteria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerConfiteria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerElectrodomesticos {
+	background: url("markers-softElectrodomesticos.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerElectrodomesticos-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerElectrodomesticos i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerElectrodomesticos-icon-white { color: #fff; }
+.awesome-markerElectrodomesticos-icon-red { background-position: 0 0; }
+.awesome-markerElectrodomesticos-icon-darkred { background-position: -180px 0; }
+.awesome-markerElectrodomesticos-icon-orange { background-position: -36px 0; }
+.awesome-markerElectrodomesticos-icon-green { background-position: -72px 0; }
+.awesome-markerElectrodomesticos-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerElectrodomesticos-icon-blue { background-position: -108px 0; }
+.awesome-markerElectrodomesticos-icon-darkblue { background-position: -216px 0; }
+.awesome-markerElectrodomesticos-icon-purple { background-position: -144px 0; }
+.awesome-markerElectrodomesticos-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerElectrodomesticos-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerHeladeria {
+	background: url("markers-softHeladeria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerHeladeria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerHeladeria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerHeladeria-icon-white { color: #fff; }
+.awesome-markerHeladeria-icon-red { background-position: 0 0; }
+.awesome-markerHeladeria-icon-darkred { background-position: -180px 0; }
+.awesome-markerHeladeria-icon-orange { background-position: -36px 0; }
+.awesome-markerHeladeria-icon-green { background-position: -72px 0; }
+.awesome-markerHeladeria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerHeladeria-icon-blue { background-position: -108px 0; }
+.awesome-markerHeladeria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerHeladeria-icon-purple { background-position: -144px 0; }
+.awesome-markerHeladeria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerHeladeria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerIglesia {
+	background: url("markers-softIglesia.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerIglesia-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerIglesia i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerIglesia-icon-white { color: #fff; }
+.awesome-markerIglesia-icon-red { background-position: 0 0; }
+.awesome-markerIglesia-icon-darkred { background-position: -180px 0; }
+.awesome-markerIglesia-icon-orange { background-position: -36px 0; }
+.awesome-markerIglesia-icon-green { background-position: -72px 0; }
+.awesome-markerIglesia-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerIglesia-icon-blue { background-position: -108px 0; }
+.awesome-markerIglesia-icon-darkblue { background-position: -216px 0; }
+.awesome-markerIglesia-icon-purple { background-position: -144px 0; }
+.awesome-markerIglesia-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerIglesia-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerRepuestos {
+	background: url("markers-softRepuestos.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerRepuestos-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerRepuestos i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerRepuestos-icon-white { color: #fff; }
+.awesome-markerRepuestos-icon-red { background-position: 0 0; }
+.awesome-markerRepuestos-icon-darkred { background-position: -180px 0; }
+.awesome-markerRepuestos-icon-orange { background-position: -36px 0; }
+.awesome-markerRepuestos-icon-green { background-position: -72px 0; }
+.awesome-markerRepuestos-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerRepuestos-icon-blue { background-position: -108px 0; }
+.awesome-markerRepuestos-icon-darkblue { background-position: -216px 0; }
+.awesome-markerRepuestos-icon-purple { background-position: -144px 0; }
+.awesome-markerRepuestos-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerRepuestos-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerTalabarteria {
+	background: url("markers-softTalabarteria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerTalabarteria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerTalabarteria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerTalabarteria-icon-white { color: #fff; }
+.awesome-markerTalabarteria-icon-red { background-position: 0 0; }
+.awesome-markerTalabarteria-icon-darkred { background-position: -180px 0; }
+.awesome-markerTalabarteria-icon-orange { background-position: -36px 0; }
+.awesome-markerTalabarteria-icon-green { background-position: -72px 0; }
+.awesome-markerTalabarteria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerTalabarteria-icon-blue { background-position: -108px 0; }
+.awesome-markerTalabarteria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerTalabarteria-icon-purple { background-position: -144px 0; }
+.awesome-markerTalabarteria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerTalabarteria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerTienda {
+	background: url("markers-softTienda.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerTienda-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerTienda i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerTienda-icon-white { color: #fff; }
+.awesome-markerTienda-icon-red { background-position: 0 0; }
+.awesome-markerTienda-icon-darkred { background-position: -180px 0; }
+.awesome-markerTienda-icon-orange { background-position: -36px 0; }
+.awesome-markerTienda-icon-green { background-position: -72px 0; }
+.awesome-markerTienda-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerTienda-icon-blue { background-position: -108px 0; }
+.awesome-markerTienda-icon-darkblue { background-position: -216px 0; }
+.awesome-markerTienda-icon-purple { background-position: -144px 0; }
+.awesome-markerTienda-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerTienda-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerVeterinaria {
+	background: url("markers-softVeterinaria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerVeterinaria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerVeterinaria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerVeterinaria-icon-white { color: #fff; }
+.awesome-markerVeterinaria-icon-red { background-position: 0 0; }
+.awesome-markerVeterinaria-icon-darkred { background-position: -180px 0; }
+.awesome-markerVeterinaria-icon-orange { background-position: -36px 0; }
+.awesome-markerVeterinaria-icon-green { background-position: -72px 0; }
+.awesome-markerVeterinaria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerVeterinaria-icon-blue { background-position: -108px 0; }
+.awesome-markerVeterinaria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerVeterinaria-icon-purple { background-position: -144px 0; }
+.awesome-markerVeterinaria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerVeterinaria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerZapato {
+	background: url("markers-softZapato.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerZapato-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerZapato i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerZapato-icon-white { color: #fff; }
+.awesome-markerZapato-icon-red { background-position: 0 0; }
+.awesome-markerZapato-icon-darkred { background-position: -180px 0; }
+.awesome-markerZapato-icon-orange { background-position: -36px 0; }
+.awesome-markerZapato-icon-green { background-position: -72px 0; }
+.awesome-markerZapato-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerZapato-icon-blue { background-position: -108px 0; }
+.awesome-markerZapato-icon-darkblue { background-position: -216px 0; }
+.awesome-markerZapato-icon-purple { background-position: -144px 0; }
+.awesome-markerZapato-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerZapato-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerComputadora {
+	background: url("markers-softComputadora.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerComputadora-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerComputadora i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerComputadora-icon-white { color: #fff; }
+.awesome-markerComputadora-icon-red { background-position: 0 0; }
+.awesome-markerComputadora-icon-darkred { background-position: -180px 0; }
+.awesome-markerComputadora-icon-orange { background-position: -36px 0; }
+.awesome-markerComputadora-icon-green { background-position: -72px 0; }
+.awesome-markerComputadora-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerComputadora-icon-blue { background-position: -108px 0; }
+.awesome-markerComputadora-icon-darkblue { background-position: -216px 0; }
+.awesome-markerComputadora-icon-purple { background-position: -144px 0; }
+.awesome-markerComputadora-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerComputadora-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerSeguridad {
+	background: url("markers-softSeguridad.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerSeguridad-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerSeguridad i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerSeguridad-icon-white { color: #fff; }
+.awesome-markerSeguridad-icon-red { background-position: 0 0; }
+.awesome-markerSeguridad-icon-darkred { background-position: -180px 0; }
+.awesome-markerSeguridad-icon-orange { background-position: -36px 0; }
+.awesome-markerSeguridad-icon-green { background-position: -72px 0; }
+.awesome-markerSeguridad-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerSeguridad-icon-blue { background-position: -108px 0; }
+.awesome-markerSeguridad-icon-darkblue { background-position: -216px 0; }
+.awesome-markerSeguridad-icon-purple { background-position: -144px 0; }
+.awesome-markerSeguridad-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerSeguridad-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerMacrobiotica {
+	background: url("markers-softMacrobiotica.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerMacrobiotica-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerMacrobiotica i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerMacrobiotica-icon-white { color: #fff; }
+.awesome-markerMacrobiotica-icon-red { background-position: 0 0; }
+.awesome-markerMacrobiotica-icon-darkred { background-position: -180px 0; }
+.awesome-markerMacrobiotica-icon-orange { background-position: -36px 0; }
+.awesome-markerMacrobiotica-icon-green { background-position: -72px 0; }
+.awesome-markerMacrobiotica-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerMacrobiotica-icon-blue { background-position: -108px 0; }
+.awesome-markerMacrobiotica-icon-darkblue { background-position: -216px 0; }
+.awesome-markerMacrobiotica-icon-purple { background-position: -144px 0; }
+.awesome-markerMacrobiotica-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerMacrobiotica-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerJoyeria {
+	background: url("markers-softJoyeria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerJoyeria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerJoyeria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerJoyeria-icon-white { color: #fff; }
+.awesome-markerJoyeria-icon-red { background-position: 0 0; }
+.awesome-markerJoyeria-icon-darkred { background-position: -180px 0; }
+.awesome-markerJoyeria-icon-orange { background-position: -36px 0; }
+.awesome-markerJoyeria-icon-green { background-position: -72px 0; }
+.awesome-markerJoyeria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerJoyeria-icon-blue { background-position: -108px 0; }
+.awesome-markerJoyeria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerJoyeria-icon-purple { background-position: -144px 0; }
+.awesome-markerJoyeria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerJoyeria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerVerdureria {
+	background: url("markers-softVerdureria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerVerdureria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerVerdureria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerVerdureria-icon-white { color: #fff; }
+.awesome-markerVerdureria-icon-red { background-position: 0 0; }
+.awesome-markerVerdureria-icon-darkred { background-position: -180px 0; }
+.awesome-markerVerdureria-icon-orange { background-position: -36px 0; }
+.awesome-markerVerdureria-icon-green { background-position: -72px 0; }
+.awesome-markerVerdureria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerVerdureria-icon-blue { background-position: -108px 0; }
+.awesome-markerVerdureria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerVerdureria-icon-purple { background-position: -144px 0; }
+.awesome-markerVerdureria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerVerdureria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerJugueteria {
+	background: url("markers-softJugueteria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerJugueteria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerJugueteria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerJugueteria-icon-white { color: #fff; }
+.awesome-markerJugueteria-icon-red { background-position: 0 0; }
+.awesome-markerJugueteria-icon-darkred { background-position: -180px 0; }
+.awesome-markerJugueteria-icon-orange { background-position: -36px 0; }
+.awesome-markerJugueteria-icon-green { background-position: -72px 0; }
+.awesome-markerJugueteria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerJugueteria-icon-blue { background-position: -108px 0; }
+.awesome-markerJugueteria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerJugueteria-icon-purple { background-position: -144px 0; }
+.awesome-markerJugueteria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerJugueteria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerMuebleria {
+	background: url("markers-softMuebleria.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerMuebleria-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerMuebleria i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerMuebleria-icon-white { color: #fff; }
+.awesome-markerMuebleria-icon-red { background-position: 0 0; }
+.awesome-markerMuebleria-icon-darkred { background-position: -180px 0; }
+.awesome-markerMuebleria-icon-orange { background-position: -36px 0; }
+.awesome-markerMuebleria-icon-green { background-position: -72px 0; }
+.awesome-markerMuebleria-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerMuebleria-icon-blue { background-position: -108px 0; }
+.awesome-markerMuebleria-icon-darkblue { background-position: -216px 0; }
+.awesome-markerMuebleria-icon-purple { background-position: -144px 0; }
+.awesome-markerMuebleria-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerMuebleria-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerPinturas {
+	background: url("markers-softPinturas.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerPinturas-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerPinturas i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerPinturas-icon-white { color: #fff; }
+.awesome-markerPinturas-icon-red { background-position: 0 0; }
+.awesome-markerPinturas-icon-darkred { background-position: -180px 0; }
+.awesome-markerPinturas-icon-orange { background-position: -36px 0; }
+.awesome-markerPinturas-icon-green { background-position: -72px 0; }
+.awesome-markerPinturas-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerPinturas-icon-blue { background-position: -108px 0; }
+.awesome-markerPinturas-icon-darkblue { background-position: -216px 0; }
+.awesome-markerPinturas-icon-purple { background-position: -144px 0; }
+.awesome-markerPinturas-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerPinturas-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerLocalidades {
+	background: url("markers-softLocalidades.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerLocalidades-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerLocalidades i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerLocalidades-icon-white { color: #fff; }
+.awesome-markerLocalidades-icon-red { background-position: 0 0; }
+.awesome-markerLocalidades-icon-darkred { background-position: -180px 0; }
+.awesome-markerLocalidades-icon-orange { background-position: -36px 0; }
+.awesome-markerLocalidades-icon-green { background-position: -72px 0; }
+.awesome-markerLocalidades-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerLocalidades-icon-blue { background-position: -108px 0; }
+.awesome-markerLocalidades-icon-darkblue { background-position: -216px 0; }
+.awesome-markerLocalidades-icon-purple { background-position: -144px 0; }
+.awesome-markerLocalidades-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerLocalidades-icon-cadetblue { background-position: -324px 0; }
+
+.awesome-markerCancha {
+	background: url("markers-softCancha.png") no-repeat 0 0;
+	width: 35px; height: 46px;
+	position:absolute;
+	left:0; top:0;
+	display: block;
+	text-align: center;
+}
+.awesome-markerCancha-shadow {
+	background: url("https://raw.github.com/lvoogdt/Leaflet.awesome-markers/master/dist/images/markers-shadow.png") no-repeat 0 0;
+	width: 36px; height: 16px;
+}
+.awesome-markerCancha i {
+	color: #333; margin-top: 10px;
+	display: inline-block; font-size: 14px;
+}
+.awesome-markerCancha-icon-white { color: #fff; }
+.awesome-markerCancha-icon-red { background-position: 0 0; }
+.awesome-markerCancha-icon-darkred { background-position: -180px 0; }
+.awesome-markerCancha-icon-orange { background-position: -36px 0; }
+.awesome-markerCancha-icon-green { background-position: -72px 0; }
+.awesome-markerCancha-icon-darkgreen { background-position: -252px 0; }
+.awesome-markerCancha-icon-blue { background-position: -108px 0; }
+.awesome-markerCancha-icon-darkblue { background-position: -216px 0; }
+.awesome-markerCancha-icon-purple { background-position: -144px 0; }
+.awesome-markerCancha-icon-darkpurple { background-position: -288px 0; }
+.awesome-markerCancha-icon-cadetblue { background-position: -324px 0; }

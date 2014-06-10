@@ -1,0 +1,35 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "cat": 1, "id": 5, "Nombre": "Plaza de Cortezal", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.357171126316175, 9.851536836853684 ] } },
+{ "type": "Feature", "properties": { "cat": 2, "id": 3, "Nombre": "Plaza De Grifo Alto", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.389756292732301, 9.877854270360766 ] } },
+{ "type": "Feature", "id": -1294967293, "properties": { "cat": 3, "id": 2, "Nombre": "Cancha de Futbol Pieda", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.362047338544812, 9.86596467349823 ] } },
+{ "type": "Feature", "id": -294967292, "properties": { "cat": 4, "id": 1, "Nombre": "Plaza de Barbacoas", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.348243816998306, 9.855905368822468 ] } },
+{ "type": "Feature", "id": 705032709, "properties": { "cat": 5, "id": 19, "Nombre": "Cancha de San Juan", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.343709663810699, 9.843522452017769 ] } },
+{ "type": "Feature", "id": 1705032710, "properties": { "cat": 6, "id": 15, "Nombre": "Parque de Puriscal", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.315757676800033, 9.846705583615764 ] } },
+{ "type": "Feature", "id": -1589934585, "properties": { "cat": 7, "id": 6, "Nombre": "Estadio de Santiago", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.311537574850121, 9.850788219796113 ] } },
+{ "type": "Feature", "id": -589934584, "properties": { "cat": 8, "id": 12, "Nombre": "Cancha Multiusos", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.331306826700796, 9.861053766234784 ] } },
+{ "type": "Feature", "id": 410065417, "properties": { "cat": 9, "id": 8, "Nombre": "Cancha Carit", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.331560441455238, 9.861673601854728 ] } },
+{ "type": "Feature", "id": 1410065418, "properties": { "cat": 10, "id": 14, "Nombre": "Cancha de Desamparatid", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.338220395824862, 9.873367895322049 ] } },
+{ "type": "Feature", "id": -1884901877, "properties": { "cat": 11, "id": 11, "Nombre": "Cancha de Bajo Campos", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.36245926954598, 9.870366623020502 ] } },
+{ "type": "Feature", "id": -884901876, "properties": { "cat": 12, "id": 31, "Nombre": "Cancha San ANtonio Aba", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.304648137782394, 9.869843135304416 ] } },
+{ "type": "Feature", "id": 115098125, "properties": { "cat": 13, "id": 30, "Nombre": "Cancha San Antonio", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.298476657233905, 9.859711954297705 ] } },
+{ "type": "Feature", "id": 1115098126, "properties": { "cat": 14, "id": 26, "Nombre": "Cancha Cerbatana", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.326127849576437, 9.82854842882721 ] } },
+{ "type": "Feature", "id": 2115098127, "properties": { "cat": 15, "id": 25, "Nombre": "Cancha Mercedes", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.331176972152235, 9.835189439709911 ] } },
+{ "type": "Feature", "id": -1179869168, "properties": { "cat": 16, "id": 24, "Nombre": "Cancha Junquillo Arrib", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.318246430105603, 9.83576133968729 ] } },
+{ "type": "Feature", "id": -179869167, "properties": { "cat": 17, "id": 50, "Nombre": "Cancha Grifo Alto", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.389756761253906, 9.877848820676626 ] } },
+{ "type": "Feature", "id": 820130834, "properties": { "cat": 18, "id": 46, "Nombre": "Plaza el Poro", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.404050294723774, 9.885109429800171 ] } },
+{ "type": "Feature", "id": 1820130835, "properties": { "cat": 19, "id": 56, "Nombre": "Plaza de San Rafael", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.288452689808651, 9.838971529946848 ] } },
+{ "type": "Feature", "id": -1474836460, "properties": { "cat": 20, "id": 57, "Nombre": "Campo Deportivo Merced", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.326605907833823, 9.837544851221454 ] } },
+{ "type": "Feature", "id": -474836459, "properties": { "cat": 21, "id": 51, "Nombre": "Cancha de Mercedes Sur", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.354264707414472, 9.82317288356362 ] } },
+{ "type": "Feature", "id": 525163542, "properties": { "cat": 22, "id": 49, "Nombre": "Cancha Santa Marta", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.378620003302501, 9.82081931460611 ] } },
+{ "type": "Feature", "id": 1525163543, "properties": { "cat": 23, "id": 48, "Nombre": "Cancha la Palma", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.38311211891525, 9.793527422239615 ] } },
+{ "type": "Feature", "id": -1769803752, "properties": { "cat": 24, "id": 48, "Nombre": "Cancha Polka", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.341572649804277, 9.78651948444643 ] } },
+{ "type": "Feature", "id": -769803751, "properties": { "cat": 25, "id": 47, "Nombre": "Cancha Candelarita", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.339894553144759, 9.79563036647183 ] } },
+{ "type": "Feature", "id": 230196250, "properties": { "cat": 26, "id": 46, "Nombre": "Cancha Pedernal", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.331155726181464, 9.802036140079093 ] } },
+{ "type": "Feature", "id": 1230196251, "properties": { "cat": 27, "id": 60, "Nombre": "Cancha de Pozos", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.293249387427579, 9.804788959814092 ] } },
+{ "type": "Feature", "id": -2064771044, "properties": { "cat": 28, "id": 67, "Nombre": "Cancha La gloria", "Tipo": "Cancha de Futbol" }, "geometry": { "type": "Point", "coordinates": [ -84.452166389139322, 9.654354692520801 ] } }
+]
+}

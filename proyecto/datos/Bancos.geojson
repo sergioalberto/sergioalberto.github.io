@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+                                                                                
+"features": [
+{ "type": "Feature", "properties": { "cat": 1, "cat_": 1, "id": 3, "NOMBRE": "Banco Nacional", "TIPO": "Banco", "ID_RESTAUR": 26 }, "geometry": { "type": "Point", "coordinates": [ -84.313709708859932, 9.847116225142868 ] } },
+{ "type": "Feature", "properties": { "cat": 2, "cat_": 2, "id": 2, "NOMBRE": "Banco Popular", "TIPO": "Banco", "ID_RESTAUR": 8 }, "geometry": { "type": "Point", "coordinates": [ -84.314635997705352, 9.845948244687197 ] } },
+{ "type": "Feature", "id": -1294967293, "properties": { "cat": 3, "cat_": 3, "id": 1, "NOMBRE": "Banco de Costa Rica", "TIPO": "Banco", "ID_RESTAUR": 8 }, "geometry": { "type": "Point", "coordinates": [ -84.315142135441945, 9.846039199688546 ] } }
+]
+}

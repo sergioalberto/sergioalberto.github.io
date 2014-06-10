@@ -1,0 +1,1148 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>Puriscal</title>
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css">
+		<link rel="stylesheet" href="icons.css">
+
+		<script src="leaflet.js"></script>
+		<script src="leaflet.awesome-markers.js"></script>
+
+		<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-zoomslider/v0.7.0/L.Control.Zoomslider.css' rel='stylesheet' />
+
+		<style type="text/css">
+		/* Global properties ======================================================== */
+		html, body {
+			width:100%; 
+			padding:0; 
+			margin:0; 
+		}
+		body {
+			font:14px/25px Arial,Helvetica,sans-serif;
+			color:#939393;
+			background:#fff
+		}
+		#pagina{margin:0 auto; width:100%;}
+
+		#header{width:100%; height:auto; float:left;}
+		#title{width:100%; height:auto; float:left; background:#272727;}
+		#creditos{width:20%; height:auto; float:right; background:#272727;}
+		#title1{width:100%; height:auto; float:left; background:#272727;}
+		#menu{width:100%; height:auto; float:left; background:#272727;}
+		#menu1{width:25%; height:auto; float:left; background:#272727;}
+		#content{width:100%; float:left;}
+		#map {width:100%; height:500px}
+		#footer{
+			background:#131313;
+   			width:100%;
+   			height:auto;
+   			float:left;
+   			text-align:center;
+		}
+		#footer p, #footer a {color:#939393;}
+		#footer a:hover {text-decoration:underline;}
+
+		.creditos {overflow:hidden; text-align:left;}
+		.creditos a {color:#939393;}
+		.creditos a:hover {text-decoration:underline;}
+		
+		h2 a{ text-decoration:none; font-size:36px; line-height:45px; color:#fff; font-weight:normal; letter-spacing:-1px; text-shadow: black 5px 5px 4px;}
+		h3 { font-size:20px; line-height:20px; color:#fff; font-weight:normal; }
+		
+
+		/* Adjustments to account for mapbox.css box-sizing rules */
+		.leaflet-control-zoomslider-knob { width:14px; height:6px; }
+		.leaflet-container .leaflet-control-zoomslider-body {-webkit-box-sizing:content-box;-moz-box-sizing:content-box; box-sizing:content-box;}
+
+		#form { margin: 0px 0 0px 0px;}
+		
+		#form label {position:relative;overflow:hidden; display: block; padding-bottom:12px;}
+		#form label strong {font-weight:normal; display:block; padding-bottom:5px;}
+
+		</style>
+	</head>
+<body>
+	
+	<div id="pagina">
+		<div id="header">
+			<div id="title">
+				<div id="creditos">
+					<div class="creditos"><a href="creditos.html">Créditos</a></div>
+				</div>
+			</div>
+			<div id="title1">
+				<h2 align="center"><a href="proyecto.html">¡Bienvenid@ al cantón de Puriscal!</a></h2>
+			</div>
+			<div id="menu">
+				<div id="menu1">
+					<h2 align="center">Pre Cálculos</h2>
+				</div>
+				<div id="menu1">
+					<h3>Distritos:</h3>
+					<form id="form" method="post" >
+            			<label>Escuelas: <input id="escuelas" type="checkbox"></label>
+    					<label>Iglesias: <input id="iglesias" type="checkbox"></label>
+    					<label>Puentes:  <input id="puentes" type="checkbox"></label>
+        			</form> 
+				</div>
+				<div id="menu1">
+					<h3>Localidades:</h3>
+					<form id="form" method="post" >
+            			<label>Comercios: <input id="comercios" type="checkbox"></label>
+        			</form>
+        			<h3>Escuela:</h3>
+					<form id="form" method="post" >
+            			<label>Plaza o parque más cercano: <input id="plazaCerca" type="checkbox"></label>
+        			</form>
+				</div>
+				<div id="menu1">
+					<h3>Banco:</h3>
+					<form id="form" method="post" >
+            			<label>Restaurante mas cercano: <input id="bancoCerca" type="checkbox"></label>
+        			</form>
+        			<h3>Parada:</h3>
+					<form id="form" method="post" >
+            			<label>Teléfono más cercano: <input id="telefonoCerca" type="checkbox"></label>
+        			</form>
+				</div>
+			</div>
+		</div>
+		<div id="content">
+			<div id="map">
+
+			</div>
+		</div>
+		<div id="footer">
+			<p>© 2014 <a href="proyecto.html">Puriscal</a>. Todos los derechos reservados.<br>
+			Estudiante de Ingeniería en Computadores.<br>
+			Costa Rica, Cartago, TEC.<br></p>
+    	</footer>
+		</div>
+	</div>
+
+	
+	<script type="text/javascript">
+	var Polilinea = 0;
+	var redMarker = L.AwesomeMarkers.icon({icon: "food",color: "green",iconColor: "black"});
+	var redMarker1 = L.AwesomeMarkers.icon({icon: "food",color: "red",iconColor: "black"});
+	var IconSalud = L.AwesomeMarkers.icon({icon: "hospital",color: "purple",iconColor: "black"});
+	var IconSalud1 = L.AwesomeMarkers.icon({icon: "hospital",color: "red",iconColor: "black"});
+	var IconSuper = L.AwesomeMarkers.icon({icon: "shopping-cart",color: "purple",iconColor: "black"});
+	var IconSuper1 = L.AwesomeMarkers.icon({icon: "shopping-cart",color: "red",iconColor: "black"});
+	var telefono = L.AwesomeMarkers.icon({icon: "phone",color: "cadetblue",iconColor: "black"});
+	var telefono1 = L.AwesomeMarkers.icon({icon: "phone",color: "red",iconColor: "black"});
+	var cajero = L.AwesomeMarkers.icon({icon: "credit-card",color: "darkpurple",iconColor: "black"});
+	var cajero1 = L.AwesomeMarkers.icon({icon: "credit-card",color: "red",iconColor: "black"});
+	var taller = L.AwesomeMarkers.icon({icon: "wrench",color: "darkblue",iconColor: "black"});
+	var taller1 = L.AwesomeMarkers.icon({icon: "wrench",color: "red",iconColor: "black"});
+	var Fotocopiadora = L.AwesomeMarkers.icon({icon: "print",color: "purple",iconColor: "black"});
+	var Fotocopiadora1 = L.AwesomeMarkers.icon({icon: "print",color: "red",iconColor: "black"});
+	var libreria = L.AwesomeMarkers.icon({icon: "book",color: "purple",iconColor: "black"});
+	var libreria1 = L.AwesomeMarkers.icon({icon: "book",color: "red",iconColor: "black"});
+	var Carniceria = L.AwesomeMarkers.icon({icon: "legal",color: "darkblue",iconColor: "black"});
+	var Carniceria1 = L.AwesomeMarkers.icon({icon: "legal",color: "red",iconColor: "black"});
+	var Floristeria = L.AwesomeMarkers.icon({icon: "cog",color: "darkgreen",iconColor: "black"});
+	var Floristeria1 = L.AwesomeMarkers.icon({icon: "cog",color: "red",iconColor: "black"});
+	var Bar = L.AwesomeMarkers.icon({icon: "glass",color: "darkpurple",iconColor: "black"});
+	var Bar1 = L.AwesomeMarkers.icon({icon: "glass",color: "red",iconColor: "black"});
+	var hotel = L.AwesomeMarkers.icon({icon: "building",color: "cadetblue",iconColor: "black"});
+	var hotel1 = L.AwesomeMarkers.icon({icon: "building",color: "red",iconColor: "black"});
+	var peluqueria = L.AwesomeMarkers.icon({icon: "cut",color: "darkgreen",iconColor: "black"});
+	var peluqueria1 = L.AwesomeMarkers.icon({icon: "cut",color: "red",iconColor: "black"});
+	var video = L.AwesomeMarkers.icon({icon: "film",color: "green",iconColor: "black"});
+	var video1 = L.AwesomeMarkers.icon({icon: "film",color: "red",iconColor: "black"});
+	var regalos = L.AwesomeMarkers.icon({icon: "gift",color: "purple",iconColor: "black"});
+	var regalos1 = L.AwesomeMarkers.icon({icon: "gift",color: "red",iconColor: "black"});
+	var iconPuentes = L.AwesomeMarkers.icon({icon: "puente",color: "blue",iconColor: "black"});
+	var iconPuentes1 = L.AwesomeMarkers.icon({icon: "puente",color: "red",iconColor: "black"});
+	var iconSemaforo = L.AwesomeMarkers.icon({icon: "semafaro",color: "green",iconColor: "black"});
+	var iconSemaforo1 = L.AwesomeMarkers.icon({icon: "semafaro",color: "red",iconColor: "black"});
+	var iconHidrante = L.AwesomeMarkers.icon({icon: "hidrante",color: "blue",iconColor: "black"});
+	var iconHidrante1 = L.AwesomeMarkers.icon({icon: "hidrante",color: "red",iconColor: "black"});
+	var iconFerreteria = L.AwesomeMarkers.icon({icon: "ferreteria",color: "blue",iconColor: "black"});
+	var iconFerreteria1 = L.AwesomeMarkers.icon({icon: "ferreteria",color: "red",iconColor: "black"});
+	var iconPanaderia = L.AwesomeMarkers.icon({icon: "panaderia",color: "blue",iconColor: "black"});
+	var iconPanaderia1 = L.AwesomeMarkers.icon({icon: "panaderia",color: "red",iconColor: "black"});
+	var iconEscuelas = L.AwesomeMarkers.icon({icon: "escuela",color: "green",iconColor: "black"});
+	var iconEscuelas1 = L.AwesomeMarkers.icon({icon: "escuela",color: "red",iconColor: "black"});
+	var iconIglesia = L.AwesomeMarkers.icon({icon: "iglesia",color: "green",iconColor: "black"});
+	var iconIglesia1 = L.AwesomeMarkers.icon({icon: "iglesia",color: "red",iconColor: "black"});
+	var iconParada = L.AwesomeMarkers.icon({icon: "parada",color: "blue",iconColor: "black"});
+	var iconParada1 = L.AwesomeMarkers.icon({icon: "parada",color: "red",iconColor: "black"});
+	var iconCiclo = L.AwesomeMarkers.icon({icon: "ciclo",color: "blue",iconColor: "black"});
+	var iconCiclo1 = L.AwesomeMarkers.icon({icon: "ciclo",color: "red",iconColor: "black"});
+	var iconTiendaRopa = L.AwesomeMarkers.icon({icon: "tienda",color: "blue",iconColor: "black"});
+	var iconTiendaRopa1 = L.AwesomeMarkers.icon({icon: "tienda",color: "red",iconColor: "black"});
+	var iconConfiteria = L.AwesomeMarkers.icon({icon: "confiteria",color: "blue",iconColor: "black"});
+	var iconConfiteria1 = L.AwesomeMarkers.icon({icon: "confiteria",color: "red",iconColor: "black"});
+	var iconZapateria = L.AwesomeMarkers.icon({icon: "zapato",color: "blue",iconColor: "black"});
+	var iconZapateria1 = L.AwesomeMarkers.icon({icon: "zapato",color: "red",iconColor: "black"});
+	var iconHeladeria = L.AwesomeMarkers.icon({icon: "heladeria",color: "blue",iconColor: "black"});
+	var iconHeladeria1 = L.AwesomeMarkers.icon({icon: "heladeria",color: "red",iconColor: "black"});
+	var iconRepuestos = L.AwesomeMarkers.icon({icon: "repuestos",color: "blue",iconColor: "black"});
+	var iconRepuestos1 = L.AwesomeMarkers.icon({icon: "repuestos",color: "red",iconColor: "black"});
+	var iconTalabarteria = L.AwesomeMarkers.icon({icon: "talabarteria",color: "blue",iconColor: "black"});
+	var iconTalabarteria1 = L.AwesomeMarkers.icon({icon: "talabarteria",color: "red",iconColor: "black"});
+	var iconElectrodomesticos = L.AwesomeMarkers.icon({icon: "electrodomesticos",color: "green",iconColor: "black"});
+	var iconElectrodomesticos1 = L.AwesomeMarkers.icon({icon: "electrodomesticos",color: "red",iconColor: "black"});
+	var iconVeterinaria = L.AwesomeMarkers.icon({icon: "veterinaria",color: "green",iconColor: "black"});
+	var iconVeterinaria1 = L.AwesomeMarkers.icon({icon: "veterinaria",color: "red",iconColor: "black"});
+	var iconComputadora = L.AwesomeMarkers.icon({icon: "computadora",color: "green",iconColor: "black"});
+	var iconComputadora1 = L.AwesomeMarkers.icon({icon: "computadora",color: "red",iconColor: "black"});
+	var iconSeguridad = L.AwesomeMarkers.icon({icon: "seguridad",color: "blue",iconColor: "black"});
+	var iconSeguridad1 = L.AwesomeMarkers.icon({icon: "seguridad",color: "red",iconColor: "black"});
+	var iconMacrobiotica = L.AwesomeMarkers.icon({icon: "macrobiotica",color: "blue",iconColor: "black"});
+	var iconMacrobiotica1 = L.AwesomeMarkers.icon({icon: "macrobiotica",color: "red",iconColor: "black"});
+	var iconVerdureria = L.AwesomeMarkers.icon({icon: "verdureria",color: "blue",iconColor: "black"});
+	var iconVerdureria1 = L.AwesomeMarkers.icon({icon: "verdureria",color: "red",iconColor: "black"});
+	var iconJugueteria = L.AwesomeMarkers.icon({icon: "jugueteria",color: "blue",iconColor: "black"});
+	var iconJugueteria1 = L.AwesomeMarkers.icon({icon: "jugueteria",color: "red",iconColor: "black"});
+	var iconMuebleria = L.AwesomeMarkers.icon({icon: "muebleria",color: "blue",iconColor: "black"});
+	var iconMuebleria1 = L.AwesomeMarkers.icon({icon: "muebleria",color: "red",iconColor: "black"});
+	var iconPinturas = L.AwesomeMarkers.icon({icon: "pinturas",color: "blue",iconColor: "black"});
+	var iconPinturas1 = L.AwesomeMarkers.icon({icon: "pinturas",color: "red",iconColor: "black"});
+	var iconJoyeria = L.AwesomeMarkers.icon({icon: "joyeria",color: "blue",iconColor: "black"});
+	var iconJoyeria1 = L.AwesomeMarkers.icon({icon: "joyeria",color: "red",iconColor: "black"});
+	var iconAgro = L.AwesomeMarkers.icon({icon: "home",color: "purple",iconColor: "black"});
+	var iconAgro1 = L.AwesomeMarkers.icon({icon: "home",color: "red",iconColor: "black"});
+	var iconBanco = L.AwesomeMarkers.icon({icon: "home",color: "purple",iconColor: "black"});
+	var iconBanco1 = L.AwesomeMarkers.icon({icon: "home",color: "red",iconColor: "black"});
+	var iconLocalidades = L.AwesomeMarkers.icon({icon: "localidades",color: "green",iconColor: "black"});
+	var iconLocalidades1 = L.AwesomeMarkers.icon({icon: "localidades",color: "red",iconColor: "black"});
+
+	var iconCancha = L.AwesomeMarkers.icon({icon: "cancha",color: "darkpurple",iconColor: "black"});
+	var iconCancha1 = L.AwesomeMarkers.icon({icon: "cancha",color: "red",iconColor: "black"});
+
+	function onEachFeature(feature, layer) {layer.bindPopup(feature.properties.Nombre);
+		
+		layer.on({
+			
+			click: highlightFeature
+		});
+	};
+	
+	function onEachFeature1(feature, layer) {layer.bindPopup(feature.properties.NDISTRITO);
+		layer.on({
+			
+			click: SeleccionDistritos
+		});
+	};
+	function onEachFeature2(feature, layer) {layer.bindPopup(feature.properties.Nombre);
+		layer.on({
+			
+			click: SeleccionLocalidades
+		});
+	};
+	
+	function onEachFeature3(feature, layer) {layer.bindPopup(feature.properties.NOMBRE);
+		
+		layer.on({
+			
+			click: highlightFeature
+		});
+	};
+	function onEachFeature4(feature, layer) {layer.bindPopup(feature.properties.Nombre);
+		
+		layer.on({
+			
+			click: SeleccionEscuelas
+		});
+	};
+	function onEachFeature5(feature, layer) {layer.bindPopup(feature.properties.Nombre);
+		
+		layer.on({
+			
+			click: SeleccionParada
+		});
+	};
+	function pointToLayer(feature, latlng) 
+	{	if(feature.properties.Tipo== "Clinica")
+		{
+			return L.marker(latlng,{icon: IconSalud});
+		}
+		else if((feature.properties.Tipo== "Tienda de Alimentos")|| (feature.properties.Tipo== "Supermercado"))
+		{
+			return L.marker(latlng,{icon: IconSuper});
+		}
+		else if(feature.properties.Tipo == "Telefono")
+		{
+			return L.marker(latlng,{icon: telefono});
+		}
+		else if(feature.properties.Tipo == "Cajero")
+		{
+			return L.marker(latlng,{icon: cajero});
+		}
+		else if(feature.properties.Tipo == "Taller Mecanico")
+		{
+			return L.marker(latlng,{icon: taller});
+		}
+		else if(feature.properties.Tipo == "Fotocopiadora")
+		{
+			return L.marker(latlng,{icon: Fotocopiadora});
+		}
+		else if(feature.properties.Tipo == "Libreria")
+		{
+			return L.marker(latlng,{icon: libreria});
+		}
+		else if(feature.properties.Tipo == "Carniceria")
+		{
+			return L.marker(latlng,{icon: Carniceria});
+		}
+		else if(feature.properties.Tipo == "Floristeria")
+		{
+			return L.marker(latlng,{icon: Floristeria});
+		}
+		else if(feature.properties.Tipo == "Bar")
+		{
+			return L.marker(latlng,{icon: Bar});
+		}
+		else if(feature.properties.Tipo == "Hotel")
+		{
+			return L.marker(latlng,{icon: hotel});
+		}
+		else if(feature.properties.Tipo == "Peluqueria")
+		{
+			return L.marker(latlng,{icon: peluqueria});
+		}
+		else if(feature.properties.Tipo == "VideoClub")
+		{
+			return L.marker(latlng,{icon: video});
+		}
+		else if(feature.properties.Tipo == "Tienda de Regalos")
+		{
+			return L.marker(latlng,{icon: regalos});
+		}
+		else if(feature.properties.Tipo == "Puente")
+		{
+			return L.marker(latlng,{icon: iconPuentes});
+		}
+		else if(feature.properties.Tipo == "Semaforo")
+		{
+			return L.marker(latlng,{icon: iconSemaforo});
+		}
+		else if(feature.properties.Tipo == "Hidrante")
+		{
+			return L.marker(latlng,{icon: iconHidrante});
+		}
+		else if(feature.properties.Tipo == "Ferreteria")
+		{
+			return L.marker(latlng,{icon: iconFerreteria});
+		}
+		else if(feature.properties.Tipo == "Panaderia")
+		{
+			return L.marker(latlng,{icon: iconPanaderia});
+		}
+		else if((feature.properties.TIPO == "Escuela")|| (feature.properties.TIPO == "Colegio"))
+		{
+			return L.marker(latlng,{icon: iconEscuelas});
+		}
+		else if(feature.properties.TIPO == "Iglesia")
+		{
+			return L.marker(latlng,{icon: iconIglesia});
+		}
+		else if(feature.properties.Tipo == "Parada")
+		{
+			return L.marker(latlng,{icon: iconParada});
+		}
+		else if(feature.properties.Tipo == "Ciclo")
+		{
+			return L.marker(latlng,{icon: iconCiclo});
+		}
+		else if(feature.properties.Tipo == "Tienda de Ropa")
+		{
+			return L.marker(latlng,{icon: iconTiendaRopa});
+		}
+		else if(feature.properties.Tipo == "Confiteria")
+		{
+			return L.marker(latlng,{icon: iconConfiteria});
+		}
+		else if(feature.properties.Tipo == "Zapateria")
+		{
+			return L.marker(latlng,{icon: iconZapateria});
+		}
+		else if(feature.properties.Tipo == "Heladeria")
+		{
+			return L.marker(latlng,{icon: iconHeladeria});
+		}
+		else if(feature.properties.Tipo == "Repuestos")
+		{
+			return L.marker(latlng,{icon: iconRepuestos});
+		}
+		else if(feature.properties.Tipo == "Talabarteria")
+		{
+			return L.marker(latlng,{icon: iconTalabarteria});
+		}
+		else if(feature.properties.Tipo == "Tienda Electrodomesticos")
+		{
+			return L.marker(latlng,{icon: iconElectrodomesticos});
+		}
+		else if(feature.properties.Tipo == "Veterinaria")
+		{
+			return L.marker(latlng,{icon: iconVeterinaria});
+		}
+		else if((feature.properties.Tipo == "Tienda de Computo")|| (feature.properties.Tipo == "Cafe Internet"))
+		{
+			return L.marker(latlng,{icon: iconComputadora});
+		}
+		else if(feature.properties.Tipo == "Seguridad")
+		{
+			return L.marker(latlng,{icon: iconSeguridad});
+		}
+		else if(feature.properties.Tipo == "Macrobiotica")
+		{
+			return L.marker(latlng,{icon: iconMacrobiotica});
+		}
+		else if(feature.properties.Tipo == "Verdureria")
+		{
+			return L.marker(latlng,{icon: iconVerdureria});
+		}
+		else if(feature.properties.Tipo == "Jugueteria")
+		{
+			return L.marker(latlng,{icon: iconJugueteria});
+		}
+		else if(feature.properties.Tipo == "Muebleria")
+		{
+			return L.marker(latlng,{icon: iconMuebleria});
+		}
+		else if(feature.properties.Tipo == "Pinturas")
+		{
+			return L.marker(latlng,{icon: iconPinturas});
+		}
+		else if(feature.properties.Tipo == "Joyeria")
+		{
+			return L.marker(latlng,{icon: iconJoyeria});
+		}
+		else if(feature.properties.Tipo == "AgroComericial")
+		{
+			return L.marker(latlng,{icon: iconAgro});
+		}
+		else if(feature.properties.Tipo == "Localidad")
+		{
+			return L.marker(latlng,{icon: iconLocalidades});
+		}
+		else if(feature.properties.Tipo == "Cancha de Futbol")
+		{
+			return L.marker(latlng,{icon: iconCancha});
+		}
+		else
+		{
+			return L.marker(latlng,{icon: redMarker})
+		}
+	};
+	function pointToLayerSalud(feature, latlng) {return L.marker(latlng, {icon: IconSalud});};
+	var xhr = new XMLHttpRequest() || new ActiveXObject("Msxml2.XMLHTTP")|| new ActiveXObject("Microsoft.XMLHTTP");
+	
+	//Capa de servicios de Comercios
+	xhr.open("GET","datos/Comercios.geojson",false); 
+	xhr.send(null);
+	var puntosComercios = JSON.parse(xhr.responseText);
+	
+	//capa de caminos
+	xhr.open("GET","datos/CaminosBuffer.geojson",false); 
+	xhr.send(null);
+	var poligonos = JSON.parse(xhr.responseText);
+	
+	//capa de servicios de Salud
+	xhr.open("GET","datos/Servicio de Salud.geojson",false); 
+	xhr.send(null);
+	var puntosSalud = JSON.parse(xhr.responseText);
+	
+	//capa de servicios de Salud
+	xhr.open("GET","datos/Servicios Turisticos.geojson",false); 
+	xhr.send(null);
+	var ServiciosTuristicos = JSON.parse(xhr.responseText);
+	
+	//capa de Puentes
+	xhr.open("GET","datos/Puente2.geojson",false); 
+	xhr.send(null);
+	var Puente = JSON.parse(xhr.responseText);
+	
+	//capa de Rios
+	xhr.open("GET","datos/Rios.geojson",false); 
+	xhr.send(null);
+	var rio = JSON.parse(xhr.responseText);
+	
+	//capa de Servicios Publicos
+	xhr.open("GET","datos/Servicios Publicos.geojson",false); 
+	xhr.send(null);
+	var ServiciosPublicos = JSON.parse(xhr.responseText);
+	
+	//capa de Edificos Publicos
+	xhr.open("GET","datos/Edificos Publicos.geojson",false); 
+	xhr.send(null);
+	var EdificosPublicos = JSON.parse(xhr.responseText);
+	
+	//capa de EscuelasColegios
+	xhr.open("GET","datos/EscuelasColegios.geojson",false); 
+	xhr.send(null);
+	var EscuelasColegios = JSON.parse(xhr.responseText);
+	
+	//capa de Instalaciones publicas
+	xhr.open("GET","datos/Instalaciones publicas.geojson",false); 
+	xhr.send(null);
+	var InstalacionesPublicas = JSON.parse(xhr.responseText);
+	
+	//capa de Distritos
+	xhr.open("GET","datos/Distritos.geojson",false); 
+	xhr.send(null);
+	var Distritos = JSON.parse(xhr.responseText);
+	
+	//capa de IglesiasDistritos
+	xhr.open("GET","datos/IglesiaDistritos.geojson",false); 
+	xhr.send(null);
+	var IglesiaDistritos = JSON.parse(xhr.responseText);
+	
+	//capa de Localidades
+	xhr.open("GET","datos/Localidades.geojson",false); 
+	xhr.send(null);
+	var Localidades = JSON.parse(xhr.responseText);
+	
+	//capa de PuntosPlazasParques
+	xhr.open("GET","datos/PlazasParques.geojson",false); 
+	xhr.send(null);
+	var PlazasParques = JSON.parse(xhr.responseText);
+	
+	//capa de PuntosParada
+	xhr.open("GET","datos/Paradas.geojson",false); 
+	xhr.send(null);
+	var Parada = JSON.parse(xhr.responseText);
+	
+	//capa de telefonos
+	xhr.open("GET","datos/Telefonos Publicos.geojson",false); 
+	xhr.send(null);
+	var Telefono = JSON.parse(xhr.responseText);
+
+	//capa de bancos
+	xhr.open("GET","datos/Bancos.geojson",false); 
+	xhr.send(null);
+	var Banco = JSON.parse(xhr.responseText);
+	
+	//Estilos
+	
+	//Estilo caminos
+	var styleCaminos = {"color": "orange","weight": 1,"opacity": 0.65};
+	//Estilo distritos
+	var styleEdificosPublicos = {"color": "yellow","weight": 1,"opacity": 0.5};
+	//Estilo distritos
+	var styleDistrito = {"color": "violet","weight": 1,"opacity": 0.65};
+	//Estilo Rios
+	var styleRio = {"color": "blue","weight": 1,"opacity": 0.65};
+	//Estilo Instalaciones Publicas
+	var styleInstalacionesPublicas = {"color": "green","weight": 1,"opacity": 0.5};
+	//Layers
+	var puntosLayer = L.geoJson(puntosComercios, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerServiciosPublicos = L.geoJson(ServiciosPublicos, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerTelefono = L.geoJson(Telefono, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerBanco = L.geoJson(Banco, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerPlazasParques = L.geoJson(PlazasParques, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerParada = L.geoJson(Parada, {pointToLayer: pointToLayer, onEachFeature: onEachFeature5});
+	var puntosLocalidades = L.geoJson(Localidades, {pointToLayer: pointToLayer, onEachFeature: onEachFeature2});
+	var puntosEscuelasCoelgios = L.geoJson(EscuelasColegios,{pointToLayer:pointToLayer,onEachFeature: onEachFeature3});
+	var puntosIglesiaDistritos = L.geoJson(IglesiaDistritos,{pointToLayer:pointToLayer,onEachFeature: onEachFeature});
+	var puntosLayerServiciosTuristicos = L.geoJson(ServiciosTuristicos, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerPuente = L.geoJson(Puente, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerSalud = L.geoJson(puntosSalud, {pointToLayer: pointToLayer, onEachFeature: onEachFeature});
+	var puntosLayerEdificosPublicos = L.geoJson(EdificosPublicos, {style:styleEdificosPublicos,onEachFeature: onEachFeature4});
+	var puntosLayerDistritos = L.geoJson(Distritos, {style:styleDistrito,onEachFeature: onEachFeature1});
+	var LayerInstalacionesPublicas = L.geoJson(InstalacionesPublicas, {style:styleInstalacionesPublicas,onEachFeature: onEachFeature4});
+	var RioLayer = L.geoJson(rio, {style:styleRio,onEachFeature: onEachFeature});
+	var poligonosCaminos = L.geoJson(poligonos, {style: styleCaminos,onEachFeature: onEachFeature});
+	
+	//Mapa
+	var map = L.map("map", {center: new L.LatLng(9.76776,-84.40632),zoom: 11,layers: [puntosLayerDistritos,
+							puntosLayerEdificosPublicos,puntosLayerServiciosPublicos]});
+							
+	// add an OpenStreetMap tile layer
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);						
+	
+	//Para Agregar Capas
+	var overlayMaps = {"Comercios": puntosLayer,"Caminos": poligonosCaminos,"Rios":RioLayer, "Centros de salud":puntosLayerSalud,
+						"Edificios": puntosLayerEdificosPublicos, "Distritos": puntosLayerDistritos, "Instalaciones":LayerInstalacionesPublicas,
+						"Puentes": puntosLayerPuente, "Servicios Publicos": puntosLayerServiciosPublicos,
+						"Servicios Turisticos":puntosLayerServiciosTuristicos, "Localidades":puntosLocalidades,
+						"Paradas": puntosLayerParada};
+	L.control.layers(null, overlayMaps).addTo(map);
+	L.control.zoomslider().addTo(map);
+	
+	
+	//Funcion para resaltar el color uno de los iconos seleccionados.
+	function highlightFeature(e) {
+		var layer = e.target;
+		resetHighlight(e);
+		if(e.target.feature.geometry.type == "Point")
+		{
+			ColorSeleccion(e.target);
+		}
+		else
+		{
+			layer.setStyle({
+				weight: 6,
+				color: 'red',
+				opacity: 0.65
+			});
+
+			if (!L.Browser.ie && !L.Browser.opera) {
+				layer.bringToFront();
+			}
+		}
+	}
+	
+	function ColorSeleccion(layer)
+	{
+		if(layer.feature.properties.Tipo == "Clinica")
+		{layer.setIcon(IconSalud1)}
+		else if((layer.feature.properties.Tipo == "Tienda de Alimentos") || (layer.feature.properties.Tipo == "Supermercado"))
+		{layer.setIcon(IconSuper1)}
+		else if(layer.feature.properties.Tipo == "Taller Mecanico")
+		{layer.setIcon(taller1)}
+		else if(layer.feature.properties.Tipo == "Fotocopiadora")
+		{layer.setIcon(Fotocopiadora1)}
+		else if(layer.feature.properties.Tipo == "Telefono")
+		{layer.setIcon(telefono1)}
+		else if(layer.feature.properties.Tipo == "Libreria")
+		{layer.setIcon(libreria1)}
+		else if(layer.feature.properties.Tipo == "Cajero")
+		{layer.setIcon(cajero1)}
+		else if(layer.feature.properties.Tipo == "Carniceria")
+		{layer.setIcon(Carniceria1)}
+		else if(layer.feature.properties.Tipo == "Bar")
+		{layer.setIcon(Bar1)}
+		else if(layer.feature.properties.Tipo == "Hotel")
+		{layer.setIcon(hotel1)}
+		else if(layer.feature.properties.Tipo == "Floristeria")
+		{layer.setIcon(Floristeria1)}
+		else if(layer.feature.properties.Tipo == "Peluqueria")
+		{layer.setIcon(peluqueria1)}
+		else if(layer.feature.properties.Tipo == "VideoClub")
+		{layer.setIcon(video1)}
+		else if(layer.feature.properties.Tipo == "Tienda de Regalos")
+		{layer.setIcon(regalos1)}
+		else if(layer.feature.properties.Tipo == "Puente")
+		{layer.setIcon(iconPuentes1)}
+		else if(layer.feature.properties.Tipo == "Semaforo")
+		{layer.setIcon(iconSemaforo1)}
+		else if(layer.feature.properties.Tipo == "Hidrante")
+		{layer.setIcon(iconHidrante1)}
+		else if(layer.feature.properties.Tipo == "Ferreteria")
+		{layer.setIcon(iconFerreteria1)}
+		else if(layer.feature.properties.Tipo == "Panaderia")
+		{layer.setIcon(iconPanaderia1)}
+		else if((layer.feature.properties.TIPO == "Escuela") || (layer.feature.properties.TIPO == "Colegio"))
+		{layer.setIcon(iconEscuelas1)}
+		else if(layer.feature.properties.TIPO == "Iglesia")
+		{layer.setIcon(iconIglesia1)}
+		else if(layer.feature.properties.Tipo == "Parada")
+		{layer.setIcon(iconParada1)}
+		else if(layer.feature.properties.Tipo == "Ciclo")
+		{layer.setIcon(iconCiclo1)}
+		else if(layer.feature.properties.Tipo == "Tienda de Ropa")
+		{layer.setIcon(iconTiendaRopa1)}
+		else if(layer.feature.properties.Tipo == "Confiteria")
+		{layer.setIcon(iconConfiteria1)}
+		else if(layer.feature.properties.Tipo == "Zapateria")
+		{layer.setIcon(iconZapateria1)}
+		else if(layer.feature.properties.Tipo == "Heladeria")
+		{layer.setIcon(iconHeladeria1)}
+		else if(layer.feature.properties.Tipo == "Repuestos")
+		{layer.setIcon(iconRepuestos1)}
+		else if(layer.feature.properties.Tipo == "Talabarteria")
+		{layer.setIcon(iconTalabarteria1)}
+		else if(layer.feature.properties.Tipo == "Tienda Electrodomesticos")
+		{layer.setIcon(iconElectrodomesticos1)}
+		else if(layer.feature.properties.Tipo == "Veterinaria")
+		{layer.setIcon(iconVeterinaria1)}
+		else if((layer.feature.properties.Tipo == "Tienda de Computo")|| (layer.feature.properties.Tipo == "Cafe Internet"))
+		{layer.setIcon(iconComputadora1)}
+		else if(layer.feature.properties.Tipo == "Seguridad")
+		{layer.setIcon(iconSeguridad1)}
+		else if(layer.feature.properties.Tipo == "Macrobiotica")
+		{layer.setIcon(iconMacrobiotica1)}
+		else if(layer.feature.properties.Tipo == "Verdureria")
+		{layer.setIcon(iconVerdureria1)}
+		else if(layer.feature.properties.Tipo == "Jugueteria")
+		{layer.setIcon(iconJugueteria1)}
+		else if(layer.feature.properties.Tipo == "Muebleria")
+		{layer.setIcon(iconMuebleria1)}
+		else if(layer.feature.properties.Tipo == "Pinturas")
+		{layer.setIcon(iconPinturas1)}
+		else if(layer.feature.properties.Tipo == "Joyeria")
+		{layer.setIcon(iconJoyeria1)}
+		else if(layer.feature.properties.Tipo == "AgroComericial")
+		{layer.setIcon(iconAgro1)}
+		else if(layer.feature.properties.Tipo == "Localidad")
+		{layer.setIcon(iconLocalidades1)}
+		else if(layer.feature.properties.Tipo == "Cancha de Futbol")
+		{layer.setIcon(iconCancha1)}
+		else{layer.setIcon(redMarker1);}
+	}
+	
+	function resetHighlight(e) {
+		if(e.target.feature.geometry.type == "Point")
+		{
+			
+			for(var indice in puntosLayer._layers)
+			{
+				if(puntosLayer._layers[indice]!= e)
+				{
+					if((puntosLayer._layers[indice].feature.properties.Tipo == "Tienda de Alimentos") || (puntosLayer._layers[indice].feature.properties.Tipo == "Supermercado"))
+					{
+						puntosLayer._layers[indice].setIcon(IconSuper);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Taller Mecanico")
+					{
+						puntosLayer._layers[indice].setIcon(taller);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Fotocopiadora")
+					{
+						puntosLayer._layers[indice].setIcon(Fotocopiadora);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Libreria")
+					{
+						puntosLayer._layers[indice].setIcon(libreria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Carniceria")
+					{
+						puntosLayer._layers[indice].setIcon(Carniceria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Floristeria")
+					{
+						puntosLayer._layers[indice].setIcon(Floristeria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Peluqueria")
+					{
+						puntosLayer._layers[indice].setIcon(peluqueria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "VideoClub")
+					{
+						puntosLayer._layers[indice].setIcon(video);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Tienda de Regalos")
+					{
+						puntosLayer._layers[indice].setIcon(regalos);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Puente")
+					{
+						puntosLayer._layers[indice].setIcon(iconPuentes);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Ferreteria")
+					{
+						puntosLayer._layers[indice].setIcon(iconFerreteria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Panaderia")
+					{
+						puntosLayer._layers[indice].setIcon(iconPanaderia);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Ciclo")
+					{
+						puntosLayer._layers[indice].setIcon(iconCiclo);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Tienda de Ropa")
+					{
+						puntosLayer._layers[indice].setIcon(iconTiendaRopa);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Confiteria")
+					{
+						puntosLayer._layers[indice].setIcon(iconConfiteria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Zapateria")
+					{
+						puntosLayer._layers[indice].setIcon(iconZapateria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Heladeria")
+					{
+						puntosLayer._layers[indice].setIcon(iconHeladeria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Repuestos")
+					{
+						puntosLayer._layers[indice].setIcon(iconRepuestos);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "talabarteria")
+					{
+						puntosLayer._layers[indice].setIcon(iconTalabarteria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Tienda Electrodomesticos")
+					{
+						puntosLayer._layers[indice].setIcon(iconElectrodomesticos);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Veterinaria")
+					{
+						puntosLayer._layers[indice].setIcon(iconVeterinaria);
+					}
+					else if((puntosLayer._layers[indice].feature.properties.Tipo == "Tienda de Computo")||(puntosLayer._layers[indice].feature.properties.Tipo == "Cafe Internet"))
+					{
+						puntosLayer._layers[indice].setIcon(iconComputadora);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Seguridad")
+					{
+						puntosLayer._layers[indice].setIcon(iconSeguridad);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Macrobiotica")
+					{
+						puntosLayer._layers[indice].setIcon(iconMacrobiotica);
+						puntosLayer._layers[indice].setIcon(iconMacrobiotica);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Verdureria")
+					{
+						puntosLayer._layers[indice].setIcon(iconVerdureria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Jugueteria")
+					{
+						puntosLayer._layers[indice].setIcon(iconJugueteria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Muebleria")
+					{
+						puntosLayer._layers[indice].setIcon(iconMuebleria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Pinturas")
+					{
+						puntosLayer._layers[indice].setIcon(iconPinturas);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Joyeria")
+					{
+						puntosLayer._layers[indice].setIcon(iconJoyeria);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "AgroComericial")
+					{
+						puntosLayer._layers[indice].setIcon(iconAgro);
+					}
+					else if(puntosLayer._layers[indice].feature.properties.Tipo == "Cancha de Futbol")
+					{
+						puntosLayer._layers[indice].setIcon(iconCancha);
+					}
+				}
+			}
+			
+			for(var indice in puntosLayerPuente._layers)
+			{
+				if(puntosLayerPuente._layers[indice]!= e)
+				{
+					puntosLayerPuente._layers[indice].setIcon(iconPuentes);
+				}
+			}
+			
+			for(var indice in puntosLayerServiciosTuristicos._layers)
+			{
+				if(puntosLayerServiciosTuristicos._layers[indice]!= e)
+				{
+					if(puntosLayerServiciosTuristicos._layers[indice].feature.properties.Tipo == "Bar")
+					{
+						puntosLayerServiciosTuristicos._layers[indice].setIcon(Bar);
+					}
+					if(puntosLayerServiciosTuristicos._layers[indice].feature.properties.Tipo == "Hotel")
+					{
+						puntosLayerServiciosTuristicos._layers[indice].setIcon(hotel);
+					}
+					else
+					{
+						puntosLayerServiciosTuristicos._layers[indice].setIcon(redMarker);
+					}
+					
+				}
+			}
+			
+			
+			for(var indice in puntosLayerSalud._layers)
+			{
+				if(puntosLayerSalud._layers[indice]!= e)
+				{
+					if(puntosLayerSalud._layers[indice].feature.properties.Tipo== "Clinica")
+					{
+						puntosLayerSalud._layers[indice].setIcon(IconSalud);
+					}
+				}
+			}
+			
+			for(var indice in puntosLayerServiciosPublicos._layers)
+			{
+				if(puntosLayerServiciosPublicos._layers[indice]!= e)
+				{
+					if(puntosLayerServiciosPublicos._layers[indice].feature.properties.Tipo== "Telefono")
+					{
+						puntosLayerServiciosPublicos._layers[indice].setIcon(telefono);
+					}
+					else if(puntosLayerServiciosPublicos._layers[indice].feature.properties.Tipo== "Cajero")
+					{
+						puntosLayerServiciosPublicos._layers[indice].setIcon(cajero);
+					}
+					else if(puntosLayerServiciosPublicos._layers[indice].feature.properties.Tipo== "Semaforo")
+					{
+						puntosLayerServiciosPublicos._layers[indice].setIcon(iconSemaforo);
+					}
+					else if(puntosLayerServiciosPublicos._layers[indice].feature.properties.Tipo== "Hidrante")
+					{
+						puntosLayerServiciosPublicos._layers[indice].setIcon(iconHidrante);
+					}
+					
+				}
+			}
+			for(var indice in puntosLayerParada._layers)
+			{
+				if(puntosLayerParada._layers[indice]!= e)
+				{
+					puntosLayerParada._layers[indice].setIcon(iconParada);
+				}
+			}
+			
+			
+			for(var indice in puntosEscuelasCoelgios._layers)
+			{
+				if(puntosEscuelasCoelgios._layers[indice]!= e)
+				{
+					puntosEscuelasCoelgios._layers[indice].setIcon(iconEscuelas);
+				}
+			}
+			
+			for(var indice in puntosIglesiaDistritos._layers)
+			{
+				if(puntosIglesiaDistritos._layers[indice]!= e)
+				{
+					puntosIglesiaDistritos._layers[indice].setIcon(iconIglesia);
+				}
+			}
+			for(var indice in puntosLocalidades._layers)
+			{
+				if(puntosLocalidades._layers[indice]!= e)
+				{
+					puntosLocalidades._layers[indice].setIcon(iconLocalidades);
+				}
+			}
+		}
+		else
+		{
+		
+			LayerInstalacionesPublicas.setStyle({
+				weight: 1,
+				color: 'green',
+				opacity: 0.5
+			});
+			
+			puntosLayerEdificosPublicos.setStyle({
+				weight: 1,
+				color: 'yellow',
+				opacity: 0.5
+			});
+			
+			poligonosCaminos.setStyle({
+				weight: 1,
+				color: 'orange',
+				opacity: 0.65
+			});
+			
+			RioLayer.setStyle({
+				weight: 1,
+				color: 'blue',
+				opacity: 0.65
+			});
+			puntosLayerDistritos.setStyle({
+				color: "violet",
+				weight: 1,
+				opacity: 0.65
+			});
+		}
+		
+	}
+	function SeleccionDistritos(e)
+	{
+		highlightFeature(e);
+		if(document.getElementById("escuelas").checked)
+		{
+			for(var indice in puntosEscuelasCoelgios._layers)
+			{
+				if(puntosEscuelasCoelgios._layers[indice].feature.properties.NDISTRITO == e.target.feature.properties.Nombre)
+				{
+					ColorSeleccion(puntosEscuelasCoelgios._layers[indice]);
+					puntosEscuelasCoelgios._layers[indice].addTo(map);	
+				}else{
+					map.removeLayer(puntosEscuelasCoelgios._layers[indice]);
+				}
+			}
+		}
+		else
+		{
+			for(var indice in puntosEscuelasCoelgios._layers)
+			{
+				map.removeLayer(puntosEscuelasCoelgios._layers[indice]);
+			}
+		}
+		if(document.getElementById("iglesias").checked)
+		{
+			for(var indice in puntosIglesiaDistritos._layers)
+			{
+				if(puntosIglesiaDistritos._layers[indice].feature.properties.NDISTRITO == e.target.feature.properties.Nombre)
+				{
+					console.log("Entro iglesia");
+					ColorSeleccion(puntosIglesiaDistritos._layers[indice]);
+					puntosIglesiaDistritos._layers[indice].addTo(map);	
+				}
+				else
+				{
+					map.removeLayer(puntosIglesiaDistritos._layers[indice]);
+				}
+			}
+		}
+		else
+		{
+			for(var indice in puntosIglesiaDistritos._layers)
+			{
+				
+				map.removeLayer(puntosIglesiaDistritos._layers[indice]);
+			}
+		}
+		if(document.getElementById("puentes").checked)
+		{
+			for(var indice in puntosLayerPuente._layers)
+			{
+				if(puntosLayerPuente._layers[indice].feature.properties.NDISTRITO == e.target.feature.properties.Nombre)
+				{
+					ColorSeleccion(puntosLayerPuente._layers[indice]);
+					puntosLayerPuente._layers[indice].addTo(map);	
+				}
+				else
+				{
+					map.removeLayer(puntosLayerPuente._layers[indice]);
+				}
+			}
+		}
+		else
+		{
+			for(var indice in puntosLayerPuente._layers)
+			{
+				map.removeLayer(puntosLayerPuente._layers[indice]);
+			}
+		}
+	
+	}
+	
+	function SeleccionLocalidades(e)
+	{
+		highlightFeature(e);
+		if(document.getElementById("comercios").checked)
+		{
+			for(var indice in puntosLayer._layers)
+			{
+				if(puntosLayer._layers[indice].feature.properties.Nombre_2 == e.target.feature.properties.Nombre)
+				{
+					ColorSeleccion(puntosLayer._layers[indice]);
+					puntosLayer._layers[indice].addTo(map);	
+				}else{
+					map.removeLayer(puntosLayer._layers[indice]);
+				}
+			}
+		}
+		
+	
+	}
+	
+	function SeleccionEscuelas(e)
+	{
+		
+		highlightFeature(e);
+		if(document.getElementById("plazaCerca").checked)
+		{
+			for(var indice in puntosEscuelasCoelgios._layers)
+			{
+				if(puntosEscuelasCoelgios._layers[indice].feature.properties.NOMBRE == e.target.feature.properties.Nombre)
+				{
+					for(var indice2 in puntosLayerPlazasParques._layers)
+					{
+						if(puntosLayerPlazasParques._layers[indice2].feature.properties.cat == puntosEscuelasCoelgios._layers[indice].feature.properties.ID_PLAZA)
+						{
+							if(Polilinea != 0)
+							{
+								map.removeLayer(Polilinea);
+							}
+							Polilinea = new L.polyline([[puntosLayerPlazasParques._layers[indice2].feature.geometry.coordinates[1],puntosLayerPlazasParques._layers[indice2].feature.geometry.coordinates[0]],
+														[puntosEscuelasCoelgios._layers[indice].feature.geometry.coordinates[1],puntosEscuelasCoelgios._layers[indice].feature.geometry.coordinates[0]]]);
+							Polilinea.addTo(map);
+							puntosLayerPlazasParques._layers[indice2].addTo(map);
+						}
+						else
+						{
+							map.removeLayer(puntosLayerPlazasParques._layers[indice2]);
+						}
+					}
+				}
+			}
+		}
+		
+		if(document.getElementById("bancoCerca").checked)
+		{
+			for(var indice in puntosLayerBanco._layers)
+			{
+				
+				if(puntosLayerBanco._layers[indice].feature.properties.NOMBRE == e.target.feature.properties.Nombre)
+				{
+					for(var indice2 in puntosLayerServiciosTuristicos._layers)
+					{
+						if(puntosLayerServiciosTuristicos._layers[indice2].feature.properties.cat == puntosLayerBanco._layers[indice].feature.properties.ID_RESTAUR)
+						{
+							if(Polilinea != 0)
+							{
+								map.removeLayer(Polilinea);
+							}
+							Polilinea = new L.polyline([[puntosLayerServiciosTuristicos._layers[indice2].feature.geometry.coordinates[1],puntosLayerServiciosTuristicos._layers[indice2].feature.geometry.coordinates[0]],
+														[puntosLayerBanco._layers[indice].feature.geometry.coordinates[1],puntosLayerBanco._layers[indice].feature.geometry.coordinates[0]]]);
+							Polilinea.addTo(map);
+							puntosLayerServiciosTuristicos._layers[indice2].addTo(map);
+						}
+						else
+						{
+							map.removeLayer(puntosLayerServiciosTuristicos._layers[indice2]);
+						}
+					}
+				}
+			}
+		}
+		
+	
+	}
+	
+	
+	function SeleccionParada(e)
+	{
+		
+		highlightFeature(e);
+		if(document.getElementById("telefonoCerca").checked)
+		{
+			
+			for(var indice in puntosLayerParada._layers)
+			{
+				if(puntosLayerParada._layers[indice].feature.properties.Nombre == e.target.feature.properties.Nombre)
+				{
+					for(var indice2 in puntosLayerTelefono._layers)
+					{
+	
+						if(puntosLayerTelefono._layers[indice2].feature.properties.cat == puntosLayerParada._layers[indice].feature.properties.idTelefono)
+						{
+							for(var indice3 in puntosLayerServiciosPublicos._layers)
+							{
+								if(puntosLayerServiciosPublicos._layers[indice3].feature.properties.id == puntosLayerTelefono._layers[indice2].feature.properties.id)
+								{
+									if(Polilinea != 0)
+									{
+										map.removeLayer(Polilinea);
+									}
+									Polilinea = new L.polyline([[puntosLayerServiciosPublicos._layers[indice3].feature.geometry.coordinates[1],puntosLayerServiciosPublicos._layers[indice3].feature.geometry.coordinates[0]],
+																[puntosLayerParada._layers[indice].feature.geometry.coordinates[1],puntosLayerParada._layers[indice].feature.geometry.coordinates[0]]]);
+									Polilinea.addTo(map);
+									puntosLayerServiciosPublicos._layers[indice3].addTo(map);
+									
+								}
+								else
+								{
+									map.removeLayer(puntosLayerServiciosPublicos._layers[indice3]);
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}
+	}
+	</script>
+	
+</body>
+</html>
